@@ -11,9 +11,9 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--white:#FFFFFF;--off:#F8FAFF;--dark:#06091A;--navy:#0E1526;--blue:#1B4FD8;--blue-lt:#3B7BF5;--blue-glow:rgba(27,79,216,0.12);--indigo:#4F46E5;--text:#0F172A;--mid:#475569;--muted:#94A3B8;--border:#E2E8F0;--border-lt:#F1F5F9;--green:#10B981;--syne:'Playfair Display',serif;--inter:'DM Sans',sans-serif}
 html{scroll-behavior:smooth}
-body{font-family:var(--inter);color:var(--text);background:var(--white);overflow-x:hidden;cursor:none}
-.cur{position:fixed;pointer-events:none;z-index:9999;width:8px;height:8px;border-radius:50%;background:var(--blue);transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
-.cur-ring{position:fixed;pointer-events:none;z-index:9998;width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(27,79,216,0.35);transform:translate(-50%,-50%);transition:width .25s,height .25s}
+body{font-family:var(--inter);color:var(--text);background:var(--white);overflow-x:hidden}
+
+
 .scroll-bar{position:fixed;top:0;left:0;height:2.5px;background:linear-gradient(90deg,var(--blue),var(--indigo));z-index:600;width:0%;pointer-events:none}
 
 /* NAV */

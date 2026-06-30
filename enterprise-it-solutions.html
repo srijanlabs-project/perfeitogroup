@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise IT Solutions — Perfeito Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --white:#FFFFFF;--off:#F8FAFF;--dark:#06091A;--navy:#0E1526;--blue:#1B4FD8;--blue-lt:#3B7BF5;
+  --blue-glow:rgba(27,79,216,0.12);--indigo:#4F46E5;--text:#0F172A;--mid:#475569;
+  --muted:#94A3B8;--border:#E2E8F0;--border-lt:#F1F5F9;--green:#10B981;
+  --syne:'Syne',sans-serif;--inter:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--inter);color:var(--text);background:var(--white);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cur{position:fixed;pointer-events:none;z-index:9999;width:8px;height:8px;border-radius:50%;background:var(--blue);transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s,transform .2s}
+.cur-ring{position:fixed;pointer-events:none;z-index:9998;width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(27,79,216,0.32);transform:translate(-50%,-50%);transition:opacity .25s}
+.scroll-bar{position:fixed;top:0;left:0;height:2.5px;background:linear-gradient(90deg,var(--blue),var(--indigo));z-index:600;width:0%;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;height:68px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,9,26,0);backdrop-filter:blur(0px);border-bottom:1px solid transparent;transition:all .35s ease}
+nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.04)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.logo-icon{width:38px;height:38px;border-radius:10px;background:var(--blue);display:grid;place-items:center;box-shadow:0 4px 12px rgba(27,79,216,0.3)}
+.logo-icon svg{width:22px;height:22px}
+.logo-name{font-family:var(--syne);font-size:17px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1;transition:color .35s}
+.logo-name span{display:block;font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:2px;transition:color .35s}
+nav.scrolled .logo-name{color:var(--text)}
+nav.scrolled .logo-name span{color:var(--muted)}
+.nav-menu{display:flex;align-items:center;gap:2px}
+.nav-item{position:relative}
+.nav-link{font-family:var(--inter);font-size:13px;font-weight:500;color:rgba(255,255,255,0.75);background:none;border:none;cursor:pointer;padding:7px 13px;border-radius:8px;display:flex;align-items:center;gap:4px;transition:all .18s;white-space:nowrap;line-height:1}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,0.08)}
+nav.scrolled .nav-link{color:var(--mid)}
+nav.scrolled .nav-link:hover{color:var(--text);background:var(--border-lt)}
+.chev{width:10px;height:10px;transition:transform .2s;flex-shrink:0}
+.nav-item:hover .chev,.nav-item.open .chev{transform:rotate(180deg)}
+.mega-panel{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);background:var(--white);border:1px solid var(--border);border-radius:16px;padding:18px;min-width:520px;box-shadow:0 2px 4px rgba(0,0,0,0.04),0 20px 56px rgba(0,0,0,0.12);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s;z-index:400}
+.mega-panel::before{content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:var(--white);border-left:1px solid var(--border);border-top:1px solid var(--border)}
+.nav-item:hover .mega-panel,.nav-item.open .mega-panel{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.mega-head{font-size:9.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;padding-bottom:10px;border-bottom:1px solid var(--border-lt);margin-bottom:8px;font-family:var(--inter)}
+.mega-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.mega-item{display:flex;gap:11px;padding:11px;border-radius:10px;text-decoration:none;transition:background .15s;align-items:flex-start}
+.mega-item:hover{background:var(--off)}
+.mi-icon{width:36px;height:36px;border-radius:8px;background:var(--blue-glow);border:1px solid rgba(27,79,216,0.12);display:grid;place-items:center;flex-shrink:0;transition:all .18s}
+.mega-item:hover .mi-icon{background:var(--blue);border-color:transparent}
+.mega-item:hover .mi-icon svg{stroke:#fff}
+.mi-icon svg{width:17px;height:17px;stroke:var(--blue);stroke-width:1.75;fill:none;transition:stroke .18s}
+.mi-title{font-family:var(--syne);font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:2px;line-height:1.2}
+.mi-body{font-size:11px;color:var(--mid);line-height:1.52;font-family:var(--inter)}
+.nav-cta{background:var(--blue);color:#fff;padding:10px 20px;border-radius:9px;font-size:13px;font-weight:600;text-decoration:none;transition:all .22s;box-shadow:0 4px 14px rgba(27,79,216,0.3);white-space:nowrap;flex-shrink:0;font-family:var(--inter)}
+.nav-cta:hover{background:var(--blue-lt);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:4px;border-radius:6px}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .25s}
+nav.scrolled .hamburger span{background:var(--text)}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.mob-nav{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--white);z-index:250;overflow-y:auto;transform:translateX(100%);transition:transform .3s ease;padding:20px}
+.mob-nav.open{transform:translateX(0)}
+.mob-section{margin-bottom:4px}
+.mob-section-head{font-family:var(--syne);font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:12px 4px 8px;border-bottom:1px solid var(--border-lt);margin-bottom:4px}
+.mob-link{display:flex;align-items:center;gap:10px;padding:9px 4px;border-radius:8px;text-decoration:none;transition:background .15s}
+.mob-link:hover{background:var(--off)}
+.mob-dot{width:28px;height:28px;border-radius:7px;background:var(--blue-glow);border:1px solid rgba(27,79,216,0.1);display:grid;place-items:center;flex-shrink:0}
+.mob-dot svg{width:13px;height:13px;stroke:var(--blue);stroke-width:1.75;fill:none}
+.mob-lt{font-family:var(--syne);font-size:13.5px;font-weight:700;color:var(--text)}
+.mob-cta{display:block;background:var(--blue);color:#fff;padding:14px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;text-align:center;margin-top:16px;font-family:var(--inter)}
+
+/* PAGE HERO */
+.page-hero{background:var(--dark);padding:140px 48px 80px;position:relative;overflow:hidden}
+.page-hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.page-hero-glow{position:absolute;top:-200px;right:-100px;width:700px;height:700px;background:radial-gradient(circle,rgba(27,79,216,0.18) 0%,transparent 65%);pointer-events:none}
+.page-hero-glow-2{position:absolute;bottom:-150px;left:-50px;width:500px;height:500px;background:radial-gradient(circle,rgba(79,70,229,0.1) 0%,transparent 65%);pointer-events:none}
+.page-hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:28px;font-size:12px;font-weight:500;color:rgba(255,255,255,0.4);font-family:var(--inter)}
+.breadcrumb a{color:rgba(255,255,255,0.4);text-decoration:none;transition:color .18s}
+.breadcrumb a:hover{color:rgba(255,255,255,0.8)}
+.breadcrumb svg{width:12px;height:12px;opacity:0.4}
+.page-hero h1{font-family:var(--syne);font-size:clamp(32px,4.8vw,60px);font-weight:800;color:#fff;line-height:1.08;letter-spacing:-0.03em;max-width:820px;margin-bottom:20px}
+.page-hero-sub{font-size:17px;line-height:1.72;color:rgba(255,255,255,0.6);max-width:680px;margin-bottom:52px;font-family:var(--inter)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,0.08);padding-top:40px}
+.stat-item{flex:1;min-width:160px;padding:0 32px 0 0;position:relative}
+.stat-item+.stat-item{border-left:1px solid rgba(255,255,255,0.08);padding-left:32px}
+.stat-num{font-family:var(--syne);font-size:clamp(22px,2.8vw,34px);font-weight:800;color:#fff;line-height:1;margin-bottom:6px}
+.stat-label{font-size:12px;color:rgba(255,255,255,0.45);font-weight:500;letter-spacing:0.02em;font-family:var(--inter)}
+
+/* SECTIONS */
+.section{padding:88px 48px}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--blue);margin-bottom:16px;font-family:var(--inter)}
+.section-label::before{content:'';display:block;width:20px;height:2px;background:var(--blue);border-radius:2px}
+.section-title{font-family:var(--syne);font-size:clamp(26px,3.2vw,42px);font-weight:800;color:var(--text);line-height:1.1;letter-spacing:-0.025em;margin-bottom:14px}
+.section-sub{font-size:16px;color:var(--mid);line-height:1.7;max-width:620px;font-family:var(--inter)}
+.section-head{margin-bottom:52px}
+.bg-off{background:var(--off)}
+.bg-dark{background:var(--dark)}
+.bg-white{background:var(--white)}
+
+/* CARD GRID */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .25s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--blue-glow),transparent 60%);opacity:0;transition:opacity .25s}
+.card:hover{border-color:rgba(27,79,216,0.2);box-shadow:0 8px 32px rgba(27,79,216,0.1);transform:translateY(-3px)}
+.card:hover::before{opacity:1}
+.card-icon{width:48px;height:48px;border-radius:12px;background:var(--blue-glow);border:1px solid rgba(27,79,216,0.15);display:grid;place-items:center;margin-bottom:18px;transition:all .25s}
+.card:hover .card-icon{background:var(--blue);border-color:transparent}
+.card:hover .card-icon svg{stroke:#fff}
+.card-icon svg{width:22px;height:22px;stroke:var(--blue);stroke-width:1.75;fill:none;transition:stroke .25s}
+.card-title{font-family:var(--syne);font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+.card-body{font-size:13.5px;color:var(--mid);line-height:1.65;font-family:var(--inter)}
+.bg-off .card{background:var(--white)}
+
+/* PARTNER LOGOS */
+.partners-grid{display:flex;flex-wrap:wrap;gap:12px}
+.partner-tag{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 24px;font-family:var(--syne);font-size:14px;font-weight:700;color:var(--mid);transition:all .2s;letter-spacing:0.02em}
+.partner-tag:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-glow)}
+
+/* PROCESS STEPS */
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.process-steps::before{content:'';position:absolute;top:28px;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--border),var(--border),transparent);z-index:0}
+.step{text-align:center;padding:0 12px;position:relative;z-index:1}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--syne);font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(27,79,216,0.3);position:relative;z-index:2}
+.step-title{font-family:var(--syne);font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px}
+.step-body{font-size:12.5px;color:var(--mid);line-height:1.6;font-family:var(--inter)}
+
+/* WHY CHOOSE */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.why-text p{font-size:16px;color:var(--mid);line-height:1.8;font-family:var(--inter);margin-bottom:16px}
+.why-text p:last-child{margin-bottom:0}
+.why-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.why-list li{display:flex;align-items:flex-start;gap:14px;font-size:15px;color:var(--text);font-family:var(--inter);line-height:1.5}
+.why-list li::before{content:'';display:block;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.12);border:1.5px solid rgba(16,185,129,0.3);flex-shrink:0;margin-top:1px;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 13l4 4L19 7' stroke='%2310B981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:14px;background-position:center;background-repeat:no-repeat}
+
+/* CTA SECTION */
+.cta-section{padding:100px 48px;background:var(--dark);text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.cta-section::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(27,79,216,0.12) 0%,transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+.cta-label{display:inline-block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(59,123,245,0.9);margin-bottom:20px;font-family:var(--inter)}
+.cta-title{font-family:var(--syne);font-size:clamp(28px,4vw,48px);font-weight:800;color:#fff;line-height:1.1;letter-spacing:-0.03em;margin-bottom:18px}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:40px;font-family:var(--inter)}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-p{background:var(--blue);color:#fff;padding:14px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .22s;box-shadow:0 6px 20px rgba(27,79,216,0.4);font-family:var(--inter)}
+.btn-p:hover{background:var(--blue-lt);transform:translateY(-2px);box-shadow:0 10px 30px rgba(27,79,216,0.5)}
+.btn-g{background:rgba(255,255,255,0.06);color:#fff;padding:14px 28px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;border:1.5px solid rgba(255,255,255,0.15);display:inline-flex;align-items:center;gap:8px;transition:all .22s;font-family:var(--inter)}
+.btn-g:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.25)}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.06)}
+.foot-top{max-width:1200px;margin:0 auto;padding:64px 48px 48px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+.foot-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.f-logo-icon{width:36px;height:36px;border-radius:9px;background:var(--blue);display:grid;place-items:center}
+.f-logo-icon svg{width:20px;height:20px}
+.f-logo-name{font-family:var(--syne);font-size:16px;font-weight:800;color:#fff;letter-spacing:-0.01em}
+.foot-desc{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.72;margin-bottom:24px;font-family:var(--inter)}
+.foot-contact-items{display:flex;flex-direction:column;gap:10px}
+.fci{display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(255,255,255,0.45);font-family:var(--inter)}
+.fci svg{width:14px;height:14px;stroke:rgba(255,255,255,0.35);stroke-width:1.75;fill:none;flex-shrink:0}
+.foot-col-head{font-family:var(--syne);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,0.5);margin-bottom:16px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.foot-links a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;font-family:var(--inter);transition:color .18s}
+.foot-links a:hover{color:rgba(255,255,255,0.85)}
+.foot-bottom{max-width:1200px;margin:0 auto;padding:20px 48px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-copy{font-size:12px;color:rgba(255,255,255,0.3);font-family:var(--inter)}
+.foot-bottom-links{display:flex;gap:20px}
+.foot-bottom-links a{font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none;font-family:var(--inter);transition:color .18s}
+.foot-bottom-links a:hover{color:rgba(255,255,255,0.6)}
+
+/* WHATSAPP */
+.wa{position:fixed;bottom:28px;right:28px;width:52px;height:52px;border-radius:50%;background:#25D366;display:grid;place-items:center;z-index:200;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform .22s}
+.wa:hover{transform:scale(1.08)}
+.wa svg{width:28px;height:28px;fill:#fff}
+
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .process-steps{grid-template-columns:repeat(3,1fr);gap:32px}
+  .process-steps::before{display:none}
+}
+@media(max-width:1024px){
+  .card-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:1fr;gap:40px}
+  .foot-top{grid-template-columns:1fr 1fr;gap:40px}
+}
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-menu,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .mob-nav{display:block}
+  .page-hero{padding:110px 20px 60px}
+  .section{padding:60px 20px}
+  .hero-stats{gap:24px}
+  .stat-item{min-width:130px}
+  .stat-item+.stat-item{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,0.08);padding-top:24px}
+  .card-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr}
+  .cta-section{padding:64px 20px}
+  .foot-top{grid-template-columns:1fr;padding:40px 20px 32px;gap:32px}
+  .foot-bottom{padding:16px 20px;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+<div class="scroll-bar" id="scrollBar"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon"><svg viewBox="0 0 22 22" fill="none"><path d="M11 2L3 18h16L11 2z" fill="white" opacity="0.92"/><path d="M11 9L7.5 18h7L11 9z" fill="white" opacity="0.4"/></svg></div>
+    <div class="logo-name">PERFEITO<span>GROUP</span></div>
+  </a>
+  <div class="nav-menu" id="navMenu">
+    <div class="nav-item has-mega">
+      <button class="nav-link">IT Solutions <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">IT Solutions</div>
+        <div class="mega-grid">
+          <a href="retail-hospitality.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/></svg></div><div><div class="mi-title">Retail &amp; Hospitality</div><p class="mi-body">Smart automation for seamless customer service.</p></div></a>
+          <a href="banking-finance-solutions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16,7 12,3 8,7"/></svg></div><div><div class="mi-title">BFSI</div><p class="mi-body">AI-led tech for efficiency and cyber-security.</p></div></a>
+          <a href="manufacturing-industry.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="mi-title">Manufacturing Industry</div><p class="mi-body">IT solutions to drive innovation and reduce costs.</p></div></a>
+          <a href="enterprise-it-solutions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div><div><div class="mi-title">Enterprise Solutions</div><p class="mi-body">Manage operations, protect data at scale.</p></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item has-mega">
+      <button class="nav-link">Infrastructure <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Infrastructure Services</div>
+        <div class="mega-grid">
+          <a href="design-build.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div><div class="mi-title">Design &amp; Build</div><p class="mi-body">Scalable, secure system design and implementation.</p></div></a>
+          <a href="interior-exterior.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div><div class="mi-title">Interior &amp; Exterior</div><p class="mi-body">Functional and aesthetically stunning workspace design.</p></div></a>
+          <a href="surveillance-and-security.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div><div class="mi-title">Surveillance &amp; Security</div><p class="mi-body">Comprehensive CCTV, access control solutions.</p></div></a>
+          <a href="civil-infra.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 20h20M6 20V9l6-6 6 6v11"/></svg></div><div><div class="mi-title">Civil Infra</div><p class="mi-body">Sustainable civil infrastructure solutions.</p></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item has-mega">
+      <button class="nav-link">Consulting <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Consulting Services</div>
+        <div class="mega-grid">
+          <a href="ecommerce-services.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="mi-title">Ecommerce Services</div><p class="mi-body">Launch &amp; scale brands with e-commerce strategy.</p></div></a>
+          <a href="gifting.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/></svg></div><div><div class="mi-title">Gifting</div><p class="mi-body">Personalized corporate gifting solutions.</p></div></a>
+          <a href="csr-project.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="mi-title">CSR Projects</div><p class="mi-body">Planning and execution of CSR initiatives.</p></div></a>
+          <a href="events-promotions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="mi-title">Events &amp; Promotions</div><p class="mi-body">Impactful brand experiences and campaigns.</p></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item has-mega">
+      <button class="nav-link">Company <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Company</div>
+        <div class="mega-grid">
+          <a href="about.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div><div class="mi-title">About Us</div><p class="mi-body">Our vision, mission and team.</p></div></a>
+          <a href="contact.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="mi-title">Contact Us</div><p class="mi-body">Get in touch for a consultation.</p></div></a>
+          <a href="our-clients.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="mi-title">Our Clients</div><p class="mi-body">Trusted by enterprises across India.</p></div></a>
+          <a href="contact.html#locations" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="mi-title">Locations</div><p class="mi-body">New Delhi and Greater Noida West offices.</p></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="contact.html" class="nav-cta">Get in Touch &rarr;</a>
+</nav>
+
+<div class="mob-nav" id="mobNav">
+  <div class="mob-section"><div class="mob-section-head">IT Solutions</div>
+    <a href="retail-hospitality.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/></svg></div><span class="mob-lt">Retail &amp; Hospitality</span></a>
+    <a href="banking-finance-solutions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="7" width="20" height="14" rx="2"/></svg></div><span class="mob-lt">BFSI</span></a>
+    <a href="manufacturing-industry.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><span class="mob-lt">Manufacturing Industry</span></a>
+    <a href="enterprise-it-solutions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/></svg></div><span class="mob-lt">Enterprise Solutions</span></a>
+  </div>
+  <div class="mob-section"><div class="mob-section-head">Infrastructure</div>
+    <a href="design-build.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div><span class="mob-lt">Design &amp; Build</span></a>
+    <a href="interior-exterior.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="mob-lt">Interior &amp; Exterior</span></a>
+    <a href="surveillance-and-security.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M23 7l-7 5 7 5V7z"/></svg></div><span class="mob-lt">Surveillance &amp; Security</span></a>
+    <a href="civil-infra.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 20h20M6 20V9l6-6 6 6v11"/></svg></div><span class="mob-lt">Civil Infra</span></a>
+  </div>
+  <div class="mob-section"><div class="mob-section-head">Consulting</div>
+    <a href="ecommerce-services.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="mob-lt">Ecommerce Services</span></a>
+    <a href="gifting.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="20 12 20 22 4 22 4 12"/></svg></div><span class="mob-lt">Gifting</span></a>
+    <a href="csr-project.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="9" cy="7" r="4"/></svg></div><span class="mob-lt">CSR Projects</span></a>
+    <a href="events-promotions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="4" width="18" height="18" rx="2"/></svg></div><span class="mob-lt">Events &amp; Promotions</span></a>
+  </div>
+  <div class="mob-section"><div class="mob-section-head">Company</div>
+    <a href="about.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="8" r="4"/></svg></div><span class="mob-lt">About Us</span></a>
+    <a href="our-clients.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/></svg></div><span class="mob-lt">Our Clients</span></a>
+    <a href="contact.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg></div><span class="mob-lt">Contact Us</span></a>
+  </div>
+  <a href="contact.html" class="mob-cta">Book a Consultation &rarr;</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-dots"></div>
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-glow-2"></div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <a href="#">IT Solutions</a>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span style="color:rgba(255,255,255,0.7)">Enterprise Solutions</span>
+    </div>
+    <h1 class="reveal">Comprehensive IT Solutions<br>for Large Enterprises</h1>
+    <p class="page-hero-sub reveal">Help enterprises manage operations, improve collaboration, protect data, and enhance decision-making with integrated technology solutions built for scale.</p>
+    <div class="hero-stats reveal">
+      <div class="stat-item">
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Enterprise Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Industry Verticals</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">ISO</div>
+        <div class="stat-label">Aligned Processes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Pan-India</div>
+        <div class="stat-label">Support Coverage</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS GRID -->
+<section class="section bg-white">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Enterprise IT Solutions Portfolio</h2>
+      <p class="section-sub">A unified suite of technology services covering every layer of your enterprise — from data centre infrastructure to end-user experience and security.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6" stroke-linecap="round" stroke-width="2.5"/><line x1="6" y1="18" x2="6" y2="18" stroke-linecap="round" stroke-width="2.5"/></svg>
+        </div>
+        <div class="card-title">Data Centre &amp; Cloud</div>
+        <div class="card-body">On-premise data centres, hybrid cloud strategy, migration, colocation and managed cloud services across AWS, Azure, and Google Cloud Platform.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 8v4l3 3"/><path d="M2 12h4M18 12h4M12 2v4M12 18v4" opacity="0.4"/></svg>
+        </div>
+        <div class="card-title">IT Infrastructure Management (ITMS)</div>
+        <div class="card-body">Proactive monitoring, patch management, IT asset management, helpdesk, and NOC services to keep your enterprise infrastructure running at peak performance.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/></svg>
+        </div>
+        <div class="card-title">Network Management</div>
+        <div class="card-body">Enterprise LAN/WAN/WiFi design, implementation and managed services. Comprehensive network security, VLAN segmentation, and SD-WAN for distributed organizations.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 8h4M6 11h2" opacity="0.5"/></svg>
+        </div>
+        <div class="card-title">Digital Signage &amp; AV</div>
+        <div class="card-body">Enterprise-wide digital signage, boardroom AV systems, video walls, interactive kiosks, and command centre setups for modern enterprise environments.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/><circle cx="8" cy="12" r="2" opacity="0.4"/></svg>
+        </div>
+        <div class="card-title">Video Surveillance</div>
+        <div class="card-body">IP CCTV networks with NVR/DVR, AI-powered video analytics, and central monitoring room setup for enterprise campuses, offices, and multi-site deployments.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="card-title">Campaign Management</div>
+        <div class="card-body">Digital marketing infrastructure: CRM integrations, marketing automation platforms, analytics dashboards, and campaign reporting tools for data-driven decisions.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none" opacity="0.5"/></svg>
+        </div>
+        <div class="card-title">Access Monitoring</div>
+        <div class="card-body">Biometric attendance, RFID access control, visitor management systems, and seamless integration with your existing HR and ERP platforms.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY PARTNERS -->
+<section class="section bg-off">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="section-label">Technology Partners</div>
+      <h2 class="section-title">Authorized by the World's Leading Brands</h2>
+      <p class="section-sub">We work with best-in-class OEM partners to deliver certified, warranted solutions — so you get enterprise-grade quality with guaranteed support.</p>
+    </div>
+    <div class="partners-grid reveal">
+      <div class="partner-tag">HPE</div>
+      <div class="partner-tag">Dell Technologies</div>
+      <div class="partner-tag">Cisco</div>
+      <div class="partner-tag">Microsoft</div>
+      <div class="partner-tag">Lenovo</div>
+      <div class="partner-tag">Zebra</div>
+      <div class="partner-tag">Hikvision</div>
+      <div class="partner-tag">HID Global</div>
+      <div class="partner-tag">Genetec</div>
+      <div class="partner-tag">Posiflex</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="section bg-white">
+  <div class="section-inner">
+    <div class="section-head reveal" style="text-align:center">
+      <div class="section-label" style="justify-content:center">How We Work</div>
+      <h2 class="section-title" style="max-width:560px;margin:0 auto 14px">A Disciplined, Enterprise-Grade Process</h2>
+      <p class="section-sub" style="margin:0 auto">From initial discovery to long-term managed services — our structured engagement model ensures predictable outcomes at every phase.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">Discovery Workshop</div>
+        <div class="step-body">Stakeholder interviews, infrastructure audits, and requirement mapping to fully understand your current state and strategic goals.</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-title">Technology Roadmap</div>
+        <div class="step-body">A prioritized, phased technology plan with architecture diagrams, cost models, and risk assessments aligned to your business roadmap.</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-title">Pilot Implementation</div>
+        <div class="step-body">Controlled proof-of-concept deployment in a defined business unit or geography to validate design decisions before full rollout.</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-title">Enterprise Rollout</div>
+        <div class="step-body">Coordinated pan-India or multi-site deployment with dedicated project management, change management, and user training support.</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">05</div>
+        <div class="step-title">Managed Services</div>
+        <div class="step-body">Ongoing NOC, helpdesk, SLA-bound monitoring, and continuous optimization to ensure your enterprise IT evolves with your business.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE PERFEITO -->
+<section class="section bg-off">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-text reveal">
+        <div class="section-label">Why Choose Perfeito</div>
+        <h2 class="section-title">Your Single Point of Accountability</h2>
+        <p>Managing multiple IT vendors across different domains is one of the biggest operational pain points for large enterprises. Perfeito Group eliminates that complexity by serving as your single, accountable technology partner — from infrastructure to AV, surveillance to access control, cloud to helpdesk.</p>
+        <p>Our team of OEM-certified engineers operates with ITIL-aligned service delivery frameworks, ensuring every engagement is governed, measurable, and continuously improved. With dedicated account management and 24/7 NOC coverage, you have enterprise-grade support without the enterprise overhead.</p>
+      </div>
+      <div class="reveal">
+        <ul class="why-list">
+          <li>Single-vendor, multi-service delivery across all technology domains</li>
+          <li>OEM-certified engineers across networking, servers, AV, and security</li>
+          <li>Dedicated account management with quarterly business reviews</li>
+          <li>24/7 NOC and multi-tier helpdesk (L1/L2/L3)</li>
+          <li>ITIL-aligned service delivery with documented SLAs</li>
+          <li>Scalable engagement models — project, retainer, or fully managed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <div class="cta-label">Let's Get Started</div>
+    <h2 class="cta-title">Transform Your Enterprise IT</h2>
+    <p class="cta-sub">Start with a focused discovery workshop and leave with a clear technology roadmap — no obligation, no jargon. Just a practical path forward.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn-p">Schedule a Discovery Workshop &rarr;</a>
+      <a href="contact.html" class="btn-g">Download Company Profile</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-top">
+    <div>
+      <div class="foot-logo"><div class="f-logo-icon"><svg viewBox="0 0 22 22" fill="none"><path d="M11 2L3 18h16L11 2z" fill="white" opacity="0.9"/><path d="M11 9L7.5 18h7L11 9z" fill="white" opacity="0.4"/></svg></div><span class="f-logo-name">PERFEITO GROUP</span></div>
+      <p class="foot-desc">Your end-to-end partner in IT solutions, infrastructure design, and strategic consulting. Trusted by enterprises, SMEs and PSUs since 2019.</p>
+      <div class="foot-contact-items">
+        <span class="fci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.63a19.79 19.79 0 01-3.07-8.7A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>+91-9910-324923</span>
+        <span class="fci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>virendra@perfeitogroup.com</span>
+        <span class="fci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>New Delhi &amp; Greater Noida West</span>
+      </div>
+    </div>
+    <div><div class="foot-col-head">IT Solutions</div><ul class="foot-links"><li><a href="retail-hospitality.html">Retail &amp; Hospitality</a></li><li><a href="banking-finance-solutions.html">BFSI Technology</a></li><li><a href="manufacturing-industry.html">Manufacturing Industry</a></li><li><a href="enterprise-it-solutions.html">Enterprise Solutions</a></li></ul></div>
+    <div><div class="foot-col-head">Services</div><ul class="foot-links"><li><a href="design-build.html">Design &amp; Build</a></li><li><a href="surveillance-and-security.html">Surveillance &amp; Security</a></li><li><a href="ecommerce-services.html">Ecommerce Services</a></li><li><a href="gifting.html">Corporate Gifting</a></li><li><a href="events-promotions.html">Events &amp; Promotions</a></li></ul></div>
+    <div><div class="foot-col-head">Company</div><ul class="foot-links"><li><a href="about.html">About Us</a></li><li><a href="our-clients.html">Our Clients</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+  </div>
+  <div class="foot-bottom"><span class="foot-copy">&copy; 2024 Perfeito Group. All Rights Reserved.</span><div class="foot-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+</footer>
+
+<a href="https://wa.me/919910324923" class="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.11 1.523 5.836L.057 23.456a.5.5 0 00.487.544.5.5 0 00.14-.02l5.773-1.505A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.957 9.957 0 01-5.184-1.453l-.371-.22-3.836 1.004 1.02-3.724-.242-.383A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';cur.style.background='var(--indigo)';ring.style.opacity='0'});el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';cur.style.background='var(--blue)';ring.style.opacity='1'})});
+const nav=document.getElementById('nav'),sb=document.getElementById('scrollBar');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>40);sb.style.width=(scrollY/(document.body.scrollHeight-innerHeight))*100+'%'},{passive:true});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%5)*80+'ms';obs.observe(el);const r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)setTimeout(()=>el.classList.add('in'),i*55)});
+const ham=document.getElementById('hamburger'),mob=document.getElementById('mobNav');
+if(ham&&mob){ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''})};
+mob&&mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open');document.body.style.overflow=''}));
+</script>
+</body>
+</html>

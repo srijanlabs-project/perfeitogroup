@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfeito Group — Innovate. Build. Deliver.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --white:#FFFFFF;--off:#F8FAFF;--dark:#06091A;--blue:#1B4FD8;--blue-lt:#3B7BF5;
+  --blue-glow:rgba(27,79,216,0.11);--indigo:#4F46E5;--text:#0F172A;--mid:#475569;
+  --muted:#94A3B8;--border:#E2E8F0;--border-lt:#F1F5F9;--green:#10B981;
+  --syne:'Syne',sans-serif;--inter:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--inter);color:var(--text);background:var(--white);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cur{position:fixed;pointer-events:none;z-index:9999;width:8px;height:8px;border-radius:50%;background:var(--blue);transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+.cur-ring{position:fixed;pointer-events:none;z-index:9998;width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(27,79,216,0.32);transform:translate(-50%,-50%);transition:width .25s,height .25s}
+.scroll-bar{position:fixed;top:0;left:0;height:2.5px;background:linear-gradient(90deg,var(--blue),var(--indigo));z-index:600;width:0%;pointer-events:none}
+
+/* ── NAV ─────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;height:68px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0);backdrop-filter:blur(0px);border-bottom:1px solid transparent;transition:all .35s ease}
+nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.04)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.logo-icon{width:38px;height:38px;border-radius:10px;background:var(--blue);display:grid;place-items:center;box-shadow:0 4px 12px rgba(27,79,216,0.3)}
+.logo-icon svg{width:22px;height:22px}
+.logo-name{font-family:var(--syne);font-size:17px;font-weight:800;color:var(--text);letter-spacing:-0.02em;line-height:1}
+.logo-name span{display:block;font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+/* Nav menu */
+.nav-menu{display:flex;align-items:center;gap:2px}
+.nav-item{position:relative}
+.nav-link{font-family:var(--inter);font-size:13px;font-weight:500;color:var(--mid);background:none;border:none;cursor:pointer;padding:7px 13px;border-radius:8px;display:flex;align-items:center;gap:4px;transition:all .18s;white-space:nowrap;line-height:1}
+.nav-link:hover{color:var(--text);background:var(--border-lt)}
+.chev{width:10px;height:10px;transition:transform .2s;flex-shrink:0}
+.nav-item:hover .chev,.nav-item.open .chev{transform:rotate(180deg)}
+/* Mega panel */
+.mega-panel{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);background:var(--white);border:1px solid var(--border);border-radius:16px;padding:18px;min-width:520px;box-shadow:0 2px 4px rgba(0,0,0,0.04),0 20px 56px rgba(0,0,0,0.12);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s;z-index:400}
+.mega-panel::before{content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:var(--white);border-left:1px solid var(--border);border-top:1px solid var(--border)}
+.nav-item:hover .mega-panel,.nav-item.open .mega-panel{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.mega-head{font-size:9.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;padding-bottom:10px;border-bottom:1px solid var(--border-lt);margin-bottom:8px;font-family:var(--inter)}
+.mega-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.mega-item{display:flex;gap:11px;padding:11px;border-radius:10px;text-decoration:none;transition:background .15s;align-items:flex-start}
+.mega-item:hover{background:var(--off)}
+.mi-icon{width:36px;height:36px;border-radius:8px;background:var(--blue-glow);border:1px solid rgba(27,79,216,0.12);display:grid;place-items:center;flex-shrink:0;transition:all .18s}
+.mega-item:hover .mi-icon{background:var(--blue);border-color:transparent}
+.mega-item:hover .mi-icon svg{stroke:#fff}
+.mi-icon svg{width:17px;height:17px;stroke:var(--blue);stroke-width:1.75;fill:none;transition:stroke .18s}
+.mi-title{font-family:var(--syne);font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:2px;line-height:1.2}
+.mi-body{font-size:11px;color:var(--mid);line-height:1.52;font-family:var(--inter)}
+/* CTA in nav */
+.nav-cta{background:var(--blue);color:#fff;padding:10px 20px;border-radius:9px;font-size:13px;font-weight:600;text-decoration:none;transition:all .22s;box-shadow:0 4px 14px rgba(27,79,216,0.3);white-space:nowrap;flex-shrink:0;font-family:var(--inter)}
+.nav-cta:hover{background:var(--blue-lt);transform:translateY(-1px)}
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:4px;border-radius:6px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+/* Mobile nav */
+.mob-nav{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--white);z-index:250;overflow-y:auto;transform:translateX(100%);transition:transform .3s ease;padding:20px}
+.mob-nav.open{transform:translateX(0)}
+.mob-section{margin-bottom:4px}
+.mob-section-head{font-family:var(--syne);font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:12px 4px 8px;border-bottom:1px solid var(--border-lt);margin-bottom:4px}
+.mob-link{display:flex;align-items:center;gap:10px;padding:9px 4px;border-radius:8px;text-decoration:none;transition:background .15s}
+.mob-link:hover{background:var(--off)}
+.mob-dot{width:28px;height:28px;border-radius:7px;background:var(--blue-glow);border:1px solid rgba(27,79,216,0.1);display:grid;place-items:center;flex-shrink:0}
+.mob-dot svg{width:13px;height:13px;stroke:var(--blue);stroke-width:1.75;fill:none}
+.mob-lt{font-family:var(--syne);font-size:13.5px;font-weight:700;color:var(--text)}
+.mob-cta{display:block;background:var(--blue);color:#fff;padding:14px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;text-align:center;margin-top:16px;font-family:var(--inter)}
+
+/* ── HERO ─────────────────────────── */
+.hero{min-height:100vh;background:var(--white);position:relative;overflow:hidden;display:flex;align-items:center;padding:100px 48px 60px;gap:56px}
+.hero-blob-1{position:absolute;top:-15%;right:-5%;width:700px;height:700px;background:radial-gradient(circle,rgba(27,79,216,0.07) 0%,transparent 65%);pointer-events:none;z-index:0;animation:blobA 20s ease-in-out infinite}
+.hero-blob-2{position:absolute;bottom:-20%;left:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(79,70,229,0.05) 0%,transparent 65%);pointer-events:none;z-index:0;animation:blobB 24s ease-in-out infinite}
+@keyframes blobA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,30px) scale(1.08)}}
+@keyframes blobB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.06)}}
+.hero-dots{position:absolute;inset:0;z-index:0;background-image:radial-gradient(circle,rgba(27,79,216,0.1) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%);pointer-events:none;opacity:.4}
+.hero-left{flex:1 1 52%;position:relative;z-index:2;max-width:640px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--off);border:1px solid var(--border);padding:6px 14px 6px 8px;border-radius:100px;font-size:11.5px;font-weight:600;color:var(--mid);margin-bottom:32px;font-family:var(--inter)}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
+.badge-text em{font-style:normal;color:var(--blue)}
+.hero h1{font-family:var(--syne);font-size:clamp(40px,5.2vw,68px);font-weight:800;line-height:1.07;letter-spacing:-0.04em;color:var(--text);margin-bottom:24px}
+.cycle-wrap{display:inline-block;position:relative;color:var(--blue);min-width:200px;vertical-align:bottom}
+.cycle-word{position:absolute;left:0;top:0;opacity:0;transform:translateY(16px);transition:opacity .4s ease,transform .4s ease;white-space:nowrap}
+.cycle-word.active{opacity:1;transform:translateY(0);position:relative}
+.hero-sub{font-size:17px;font-weight:400;line-height:1.72;color:var(--mid);max-width:480px;margin-bottom:40px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.btn-p{background:var(--blue);color:#fff;padding:14px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .22s;box-shadow:0 6px 20px rgba(27,79,216,0.35);font-family:var(--inter)}
+.btn-p:hover{background:var(--blue-lt);transform:translateY(-2px);box-shadow:0 10px 30px rgba(27,79,216,0.4)}
+.btn-g{background:var(--white);color:var(--text);padding:14px 28px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;border:1.5px solid var(--border);display:inline-flex;align-items:center;gap:8px;transition:all .22s;font-family:var(--inter)}
+.btn-g:hover{border-color:var(--blue);color:var(--blue);background:var(--off)}
+.hero-clients{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hc-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap}
+.hc-sep{width:1px;height:16px;background:var(--border)}
+.hc-logos{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.hc-logo{font-size:13px;font-weight:700;color:var(--muted)}
+/* Hero right */
+.hero-right{flex:0 0 44%;position:relative;z-index:2;display:flex;align-items:center;justify-content:center;height:520px}
+.hv-card{position:absolute;background:var(--white);border-radius:20px;padding:28px;box-shadow:0 4px 6px -1px rgba(0,0,0,0.04),0 24px 48px -8px rgba(0,0,0,0.10);border:1px solid var(--border);transition:transform .4s ease}
+.hv-card:hover{transform:translateY(-6px) !important}
+.hv-1{width:280px;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3}
+.hv-2{width:260px;top:42%;left:30%;transform:translate(-50%,-50%) rotate(-5deg);z-index:2;background:var(--off)}
+.hv-3{width:250px;top:58%;left:70%;transform:translate(-50%,-50%) rotate(5deg);z-index:2;background:var(--off)}
+.hvc-pill{display:inline-flex;align-items:center;gap:6px;background:var(--blue-glow);border:1px solid rgba(27,79,216,0.15);padding:4px 10px;border-radius:100px;font-size:10.5px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;font-family:var(--inter)}
+.hvc-pill .dot{width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.hvc-icon{width:42px;height:42px;border-radius:11px;background:var(--off);border:1px solid var(--border);display:grid;place-items:center;margin-bottom:14px}
+.hvc-icon svg{width:22px;height:22px;stroke:var(--blue);stroke-width:1.75;fill:none}
+.hvc-title{font-family:var(--syne);font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px}
+.hvc-body{font-size:12.5px;color:var(--mid);line-height:1.6;font-family:var(--inter)}
+.hvc-stat{display:flex;align-items:baseline;gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border-lt)}
+.hvc-stat-val{font-family:var(--syne);font-size:22px;font-weight:800;color:var(--blue);letter-spacing:-0.02em}
+.hvc-stat-lbl{font-size:11px;color:var(--muted);font-family:var(--inter);font-weight:500}
+.hv-badge{position:absolute;z-index:5;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:12px 16px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+.hv-b1{top:8%;right:-10px}
+.hv-b2{bottom:6%;left:-10px}
+.hvb-val{font-family:var(--syne);font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.02em;line-height:1}
+.hvb-lbl{font-size:10.5px;color:var(--muted);font-family:var(--inter);font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
+
+/* ── TAPE ─────────────────────────── */
+.tape{background:var(--dark);padding:15px 0;overflow:hidden}
+.tape-inner{display:inline-flex;gap:0;white-space:nowrap;animation:tapeScroll 30s linear infinite;font-family:var(--syne);font-size:12.5px;font-weight:700;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:.12em}
+.tape-inner .dot{color:rgba(255,255,255,0.18);margin:0 18px}
+@keyframes tapeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── LOGO STRIP ─────────────────── */
+.logo-strip{background:var(--white);border-bottom:1px solid var(--border);padding:20px 0;overflow:hidden;position:relative}
+.logo-strip::before,.logo-strip::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+.logo-strip::before{left:0;background:linear-gradient(90deg,var(--white),transparent)}
+.logo-strip::after{right:0;background:linear-gradient(-90deg,var(--white),transparent)}
+.ls-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:0 48px;margin-bottom:12px;font-family:var(--inter)}
+.ls-track{display:flex;gap:0;align-items:center}
+.ls-inner{display:flex;align-items:center;gap:52px;animation:logoMarquee 22s linear infinite;white-space:nowrap}
+@keyframes logoMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ls-name{font-family:var(--syne);font-size:14px;font-weight:700;color:#C5CDD9;letter-spacing:-0.01em;flex-shrink:0;transition:color .2s}
+.ls-name:hover{color:var(--mid)}
+.ls-sep{color:#E2E8F0;font-size:20px;flex-shrink:0}
+
+/* ── SHARED ─────────────────────── */
+.sec{padding:96px 48px}
+.wrap{max-width:1120px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;font-family:var(--inter)}
+.eyebrow::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px}
+.s-title{font-family:var(--syne);font-size:clamp(28px,3.4vw,44px);font-weight:800;line-height:1.12;letter-spacing:-0.03em;color:var(--text)}
+.s-sub{font-size:16px;line-height:1.7;color:var(--mid);margin-top:14px;max-width:520px;font-weight:400}
+.sec-hdr{text-align:center;margin-bottom:60px}
+.sec-hdr .eyebrow{display:flex;justify-content:center}
+.sec-hdr .s-sub{margin-left:auto;margin-right:auto}
+
+/* ── SERVICES 6-GRID ─────────────── */
+.services-sec{background:var(--white)}
+.srv-grid-6{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.srv-card{background:var(--white);border:1.5px solid var(--border);border-radius:18px;padding:32px 28px;transition:all .28s ease;position:relative;overflow:hidden;cursor:default;text-decoration:none;display:block}
+.srv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--indigo));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.srv-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.08);border-color:rgba(27,79,216,0.15)}
+.srv-card:hover::after{transform:scaleX(1)}
+.srv-card:hover .srv-icon{background:var(--blue);border-color:transparent}
+.srv-card:hover .srv-icon svg{stroke:#fff}
+.srv-icon{width:46px;height:46px;border-radius:12px;background:var(--off);border:1.5px solid var(--border);display:grid;place-items:center;margin-bottom:20px;transition:all .22s}
+.srv-icon svg{width:23px;height:23px;stroke:var(--blue);stroke-width:1.75;fill:none;transition:stroke .22s}
+.srv-cat{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;font-family:var(--inter)}
+.srv-title{font-family:var(--syne);font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-0.01em}
+.srv-body{font-size:13.5px;line-height:1.65;color:var(--mid)}
+.srv-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:16px}
+.srv-tag{font-size:11px;font-weight:600;color:var(--mid);background:var(--border-lt);padding:3px 9px;border-radius:100px;font-family:var(--inter)}
+.srv-arrow{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--blue);margin-top:16px;transition:gap .18s;font-family:var(--inter)}
+.srv-card:hover .srv-arrow{gap:9px}
+
+/* ── STATS ───────────────────────── */
+.stats-sec{background:var(--dark);padding:0 48px}
+.stats-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.stat-cell{text-align:center;padding:56px 16px;border-right:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden}
+.stat-cell::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 110%,rgba(27,79,216,0.1) 0%,transparent 70%);pointer-events:none}
+.stat-cell:last-child{border-right:none}
+.stat-num{font-family:var(--syne);font-size:46px;font-weight:800;color:#fff;letter-spacing:-0.04em;line-height:1;margin-bottom:10px}
+.stat-num em{font-style:normal;color:#60A5FA}
+.stat-lbl{font-size:10.5px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.1em;font-weight:600;font-family:var(--inter)}
+
+/* ── ABOUT ───────────────────────── */
+.about-sec{background:var(--off)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-visual{position:relative}
+.av-main{background:linear-gradient(145deg,#0E1526,#1a2744);border-radius:24px;padding:44px;overflow:hidden;position:relative}
+.av-main::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(27,79,216,0.25) 0%,transparent 70%);pointer-events:none}
+.av-main::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(79,70,229,0.15) 0%,transparent 70%);pointer-events:none}
+.avm-label{font-size:10.5px;font-weight:700;color:rgba(255,255,255,0.28);text-transform:uppercase;letter-spacing:.14em;margin-bottom:8px;font-family:var(--inter)}
+.avm-hed{font-family:var(--syne);font-size:22px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:26px;letter-spacing:-0.02em}
+.avm-hed span{color:#93C5FD}
+.avm-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative;z-index:1}
+.avm-m{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:13px;padding:16px}
+.avm-val{font-family:var(--syne);font-size:26px;font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1}
+.avm-val em{font-style:normal;color:#34D399}
+.avm-lbl{font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.08em;margin-top:5px;font-weight:600;font-family:var(--inter)}
+.av-float{position:absolute;bottom:-22px;right:-22px;background:var(--white);border-radius:16px;padding:14px 18px;box-shadow:0 20px 50px rgba(0,0,0,0.12);border:1px solid var(--border);max-width:200px}
+.avf-title{font-family:var(--syne);font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.avf-sub{font-size:11.5px;color:var(--mid);line-height:1.5;font-family:var(--inter)}
+.about-points{margin-top:28px;display:flex;flex-direction:column;gap:0}
+.ap{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:12px;transition:background .18s;cursor:default}
+.ap:hover{background:var(--white)}
+.ap-num{font-family:var(--syne);font-size:11px;font-weight:800;color:var(--blue);width:26px;height:26px;border-radius:7px;background:var(--blue-glow);display:grid;place-items:center;flex-shrink:0;margin-top:2px}
+.ap-title{font-family:var(--syne);font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.ap-body{font-size:13px;color:var(--mid);line-height:1.58;font-family:var(--inter)}
+
+/* ── REACH SECTION ──────────────── */
+.reach-sec{background:var(--white)}
+.reach-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.reach-visual{background:var(--off);border:1.5px solid var(--border);border-radius:20px;padding:44px;text-align:center;position:relative;overflow:hidden}
+.reach-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(27,79,216,0.05) 0%,transparent 65%)}
+.rv-num{font-family:var(--syne);font-size:68px;font-weight:800;color:var(--blue);letter-spacing:-0.04em;line-height:1;position:relative}
+.rv-num span{color:var(--text);opacity:.2}
+.rv-lbl{font-size:11.5px;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;font-family:var(--inter)}
+.rv-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.rv-tag{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-family:var(--syne);font-size:12px;font-weight:700;color:var(--mid);text-align:left;transition:all .2s}
+.rv-tag:hover{border-color:var(--blue);color:var(--blue)}
+.rv-tag .flag{font-size:16px;display:block;margin-bottom:2px}
+.reach-features{display:flex;flex-direction:column;gap:0}
+.rf{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--border)}
+.rf:last-child{border-bottom:none}
+.rf-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:6px}
+.rf-title{font-family:var(--syne);font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.rf-body{font-size:13px;color:var(--mid);line-height:1.58;font-family:var(--inter)}
+
+/* ── INDUSTRIES ──────────────────── */
+.ind-sec{background:var(--off)}
+.ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:52px}
+.ind-item{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:20px 18px;display:flex;align-items:center;gap:13px;transition:all .22s;cursor:default}
+.ind-item:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 10px 30px rgba(27,79,216,0.08)}
+.ind-item:hover .ind-icon{background:var(--blue);border-color:transparent}
+.ind-item:hover .ind-icon svg{stroke:#fff}
+.ind-icon{width:38px;height:38px;flex-shrink:0;border-radius:10px;background:var(--off);border:1.5px solid var(--border);display:grid;place-items:center;transition:all .22s}
+.ind-icon svg{width:18px;height:18px;stroke:var(--blue);stroke-width:1.75;fill:none;transition:stroke .22s}
+.ind-name{font-family:var(--syne);font-size:13px;font-weight:700;color:var(--text)}
+
+/* ── CASE STUDIES ─────────────────── */
+.cases-sec{background:var(--white)}
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.case-card{background:var(--white);border:1.5px solid var(--border);border-radius:18px;overflow:hidden;transition:all .25s}
+.case-card:hover{transform:translateY(-5px);box-shadow:0 24px 56px rgba(0,0,0,0.08);border-color:transparent}
+.cc-top{height:8px;width:100%}
+.cc-top.c1{background:linear-gradient(90deg,var(--blue),var(--indigo))}
+.cc-top.c2{background:linear-gradient(90deg,#059669,#10B981)}
+.cc-top.c3{background:linear-gradient(90deg,#7C3AED,#A855F7)}
+.cc-body{padding:28px}
+.cc-tag{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;font-family:var(--inter)}
+.cc-brand{font-family:var(--syne);font-size:19px;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em}
+.cc-desc{font-size:13.5px;color:var(--mid);line-height:1.65;font-family:var(--inter);margin-bottom:22px}
+.cc-divider{height:1px;background:var(--border);margin-bottom:18px}
+.cc-metrics{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ccm-val{font-family:var(--syne);font-size:30px;font-weight:800;color:var(--green);letter-spacing:-0.03em;line-height:1}
+.ccm-lbl{font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;font-family:var(--inter)}
+.cc-foot{padding:14px 28px;border-top:1px solid var(--border);background:var(--off);display:flex;align-items:center;justify-content:space-between}
+.cc-service{font-size:11.5px;color:var(--muted);font-weight:500;font-family:var(--inter)}
+.cc-link{font-size:12px;font-weight:700;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:3px;font-family:var(--inter)}
+
+/* ── TESTIMONIALS ─────────────────── */
+.testi-sec{background:var(--off)}
+.testi-track-wrap{overflow:hidden;position:relative;margin-top:52px}
+.testi-track-wrap::before,.testi-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+.testi-track-wrap::before{left:0;background:linear-gradient(90deg,var(--off),transparent)}
+.testi-track-wrap::after{right:0;background:linear-gradient(-90deg,var(--off),transparent)}
+.testi-track{display:flex;gap:20px;animation:testiScroll 42s linear infinite;width:max-content}
+.testi-track:hover{animation-play-state:paused}
+@keyframes testiScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.testi-card{flex-shrink:0;width:380px;background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:30px}
+.testi-card:hover{box-shadow:0 16px 40px rgba(0,0,0,0.07)}
+.tc-stars{display:flex;gap:2px;margin-bottom:14px}
+.tc-star{color:#F59E0B;font-size:13px}
+.tc-quote{font-size:14px;line-height:1.72;color:var(--mid);font-style:italic;margin-bottom:20px;font-family:var(--inter)}
+.tc-author{display:flex;align-items:center;gap:12px}
+.tc-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--indigo));display:grid;place-items:center;font-family:var(--syne);font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.tc-name{font-family:var(--syne);font-size:13px;font-weight:700;color:var(--text)}
+.tc-role{font-size:11px;color:var(--muted);margin-top:2px;font-family:var(--inter)}
+
+/* ── CTA ─────────────────────────── */
+.cta-sec{background:var(--dark);padding:96px 48px;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(27,79,216,0.18) 0%,transparent 70%);pointer-events:none}
+.cta-grid{display:grid;grid-template-columns:1fr auto;align-items:center;gap:60px;position:relative;z-index:1}
+.cta-eyebrow{font-size:11px;font-weight:700;color:#60A5FA;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:block;font-family:var(--inter)}
+.cta-hed{font-family:var(--syne);font-size:clamp(26px,3vw,46px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:14px}
+.cta-hed em{font-style:normal;color:#93C5FD}
+.cta-deck{font-size:15px;color:rgba(255,255,255,0.4);line-height:1.68;max-width:500px;font-family:var(--inter);font-weight:300}
+.cta-actions{display:flex;flex-direction:column;gap:10px;flex-shrink:0}
+.btn-cta{background:var(--blue);color:#fff;padding:16px 34px;border-radius:10px;font-size:14.5px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;justify-content:center;transition:all .22s;white-space:nowrap;box-shadow:0 6px 20px rgba(27,79,216,0.4);font-family:var(--inter)}
+.btn-cta:hover{background:var(--blue-lt);transform:translateY(-2px)}
+.btn-cta-ghost{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.65);padding:14px 28px;border-radius:10px;font-size:13.5px;font-weight:500;text-decoration:none;border:1px solid rgba(255,255,255,0.1);display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .22s;font-family:var(--inter)}
+.btn-cta-ghost:hover{background:rgba(255,255,255,0.12)}
+
+/* ── FOOTER ─────────────────────── */
+footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,255,255,0.04)}
+.foot-top{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px}
+.foot-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.f-logo-icon{width:30px;height:30px;background:var(--blue);border-radius:7px;display:grid;place-items:center}
+.f-logo-name{font-family:var(--syne);font-size:14px;font-weight:800;color:#fff}
+.foot-desc{font-size:12.5px;color:rgba(255,255,255,0.26);line-height:1.75;margin-bottom:22px;font-family:var(--inter);max-width:270px}
+.foot-contact-items{display:flex;flex-direction:column;gap:8px}
+.fci{font-size:12px;color:rgba(255,255,255,0.32);font-family:var(--inter);display:flex;align-items:center;gap:8px}
+.fci svg{width:12px;height:12px;stroke:rgba(255,255,255,0.28);stroke-width:1.75;fill:none;flex-shrink:0}
+.foot-col-head{font-family:var(--inter);font-size:10px;font-weight:700;color:rgba(255,255,255,0.2);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.foot-links a{font-size:12.5px;color:rgba(255,255,255,0.38);text-decoration:none;transition:color .18s;font-family:var(--inter)}
+.foot-links a:hover{color:rgba(255,255,255,0.85)}
+.foot-bottom{max-width:1120px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.05);padding-top:22px;display:flex;align-items:center;justify-content:space-between}
+.foot-copy{font-size:11.5px;color:rgba(255,255,255,0.16);font-family:var(--inter)}
+.foot-bottom-links{display:flex;gap:20px}
+.foot-bottom-links a{font-size:11.5px;color:rgba(255,255,255,0.16);text-decoration:none;font-family:var(--inter)}
+.foot-bottom-links a:hover{color:rgba(255,255,255,0.5)}
+.wa{position:fixed;bottom:28px;right:28px;z-index:400;width:52px;height:52px;background:#25D366;border-radius:50%;display:grid;place-items:center;box-shadow:0 4px 20px rgba(37,211,102,0.45);text-decoration:none;transition:transform .2s}
+.wa:hover{transform:scale(1.1)}
+.wa svg{width:26px;height:26px;fill:#fff}
+
+/* ── REVEAL ──────────────────────── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ─────────────────── */
+@media(max-width:1024px){
+  nav{padding:0 28px}.hero{padding:90px 28px 60px;gap:36px}.sec{padding:72px 28px}
+  .stats-sec,.cta-sec{padding-left:28px;padding-right:28px}
+  .srv-grid-6{grid-template-columns:1fr 1fr}
+  .about-grid,.reach-grid{grid-template-columns:1fr;gap:48px}
+  .about-visual{order:-1}.av-float{bottom:-16px;right:-8px}
+  .cta-grid{grid-template-columns:1fr;gap:40px}
+  .foot-top{grid-template-columns:1fr 1fr;gap:36px}
+  footer{padding:52px 28px 24px}
+}
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-menu{display:none}.nav-cta{display:none}.hamburger{display:flex}.mob-nav{display:block}
+  .hero{flex-direction:column;padding:80px 20px 48px;text-align:center}
+  .hero-right{display:none}.hero-clients{justify-content:center}.hero-sub{margin-left:auto;margin-right:auto}.hero-btns{justify-content:center}
+  .sec{padding:60px 20px}.stats-sec{padding:0 20px}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .stat-cell{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .stat-cell:nth-child(2n){border-right:none}.stat-cell:last-child{border-bottom:none}
+  .srv-grid-6{grid-template-columns:1fr}
+  .ind-grid{grid-template-columns:1fr 1fr}
+  .cases-grid{grid-template-columns:1fr}
+  .cta-sec{padding:64px 20px}.cta-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr;gap:28px}
+  footer{padding:48px 20px 22px}
+  .foot-bottom{flex-direction:column;gap:10px;text-align:center}
+  .logo-strip{padding:16px 0}
+}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon"><svg viewBox="0 0 22 22" fill="none"><path d="M11 2L3 18h16L11 2z" fill="white" opacity="0.92"/><path d="M11 9L7.5 18h7L11 9z" fill="white" opacity="0.4"/></svg></div>
+    <div class="logo-name">PERFEITO<span>GROUP</span></div>
+  </a>
+
+  <div class="nav-menu" id="navMenu">
+    <!-- IT Solutions -->
+    <div class="nav-item has-mega">
+      <button class="nav-link">IT Solutions <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">IT Solutions</div>
+        <div class="mega-grid">
+          <a href="retail-hospitality.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div><div><div class="mi-title">Retail &amp; Hospitality</div><p class="mi-body">Smart automation for seamless customer service and operational efficiency.</p></div></a>
+          <a href="banking-finance-solutions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16,7 12,3 8,7"/><line x1="12" y1="12" x2="12" y2="17"/></svg></div><div><div class="mi-title">BFSI</div><p class="mi-body">AI-led tech for efficiency, compliance, cyber-security and CX.</p></div></a>
+          <a href="manufacturing-industry.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="mi-title">Manufacturing Industry</div><p class="mi-body">IT solutions to drive innovation, reduce costs and improve quality.</p></div></a>
+          <a href="enterprise-it-solutions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div><div><div class="mi-title">Enterprise Solutions</div><p class="mi-body">Manage operations, protect data and enhance decision-making at scale.</p></div></a>
+        </div>
+      </div>
+    </div>
+    <!-- Infrastructure -->
+    <div class="nav-item has-mega">
+      <button class="nav-link">Infrastructure <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Infrastructure Services</div>
+        <div class="mega-grid">
+          <a href="design-build.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div><div class="mi-title">Design &amp; Build</div><p class="mi-body">Scalable, secure physical and virtual system design and implementation.</p></div></a>
+          <a href="interior-exterior.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div><div><div class="mi-title">Interior &amp; Exterior Furniture</div><p class="mi-body">Innovative, functional and aesthetically stunning workspace design.</p></div></a>
+          <a href="surveillance-and-security.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div><div class="mi-title">Surveillance &amp; Security</div><p class="mi-body">Comprehensive CCTV, access control and network security solutions.</p></div></a>
+          <a href="civil-infra.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M6 20V9l6-6 6 6v11"/></svg></div><div><div class="mi-title">Civil Infra</div><p class="mi-body">Sustainable civil infrastructure using modern engineering techniques.</p></div></a>
+        </div>
+      </div>
+    </div>
+    <!-- Consulting -->
+    <div class="nav-item has-mega">
+      <button class="nav-link">Consulting <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Consulting Services</div>
+        <div class="mega-grid">
+          <a href="ecommerce-services.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="mi-title">Ecommerce Services</div><p class="mi-body">Launch &amp; scale brands with e-commerce strategy, growth and performance marketing.</p></div></a>
+          <a href="gifting.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div><div><div class="mi-title">Gifting</div><p class="mi-body">Personalized, luxury and eco-friendly gifting solutions for corporate &amp; trade.</p></div></a>
+          <a href="csr-project.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="mi-title">CSR Projects</div><p class="mi-body">Planning, execution and monitoring of corporate social responsibility initiatives.</p></div></a>
+          <a href="events-promotions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="mi-title">Events &amp; Promotions</div><p class="mi-body">Impactful brand experiences, event management and promotional campaigns.</p></div></a>
+        </div>
+      </div>
+    </div>
+    <!-- Company -->
+    <div class="nav-item has-mega">
+      <button class="nav-link">Company <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Company</div>
+        <div class="mega-grid">
+          <a href="about.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div><div class="mi-title">About Us</div><p class="mi-body">Our vision, mission, values and the team behind Perfeito Group.</p></div></a>
+          <a href="contact.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="mi-title">Contact Us</div><p class="mi-body">Reach out with questions, proposals or to schedule a consultation.</p></div></a>
+          <a href="our-clients.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="mi-title">Our Clients</div><p class="mi-body">Trusted by enterprises, SMEs and PSUs across banking, retail and more.</p></div></a>
+          <a href="contact.html#locations" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="mi-title">Locations</div><p class="mi-body">New Delhi (Okhla) and Greater Noida West — visit us by appointment.</p></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="contact.html" class="nav-cta">Get in Touch &rarr;</a>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mob-nav" id="mobNav">
+  <div class="mob-section"><div class="mob-section-head">IT Solutions</div>
+    <a href="retail-hospitality.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Retail &amp; Hospitality</span></a>
+    <a href="banking-finance-solutions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">BFSI</span></a>
+    <a href="manufacturing-industry.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Manufacturing Industry</span></a>
+    <a href="enterprise-it-solutions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Enterprise Solutions</span></a>
+  </div>
+  <div class="mob-section"><div class="mob-section-head">Infrastructure</div>
+    <a href="design-build.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Design &amp; Build</span></a>
+    <a href="interior-exterior.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Interior &amp; Exterior</span></a>
+    <a href="surveillance-and-security.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Surveillance &amp; Security</span></a>
+    <a href="civil-infra.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M2 20h20M6 20V9l6-6 6 6v11" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Civil Infra</span></a>
+  </div>
+  <div class="mob-section"><div class="mob-section-head">Consulting</div>
+    <a href="ecommerce-services.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Ecommerce Services</span></a>
+    <a href="gifting.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 12 20 22 4 22 4 12" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Gifting</span></a>
+    <a href="csr-project.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">CSR Projects</span></a>
+    <a href="events-promotions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Events &amp; Promotions</span></a>
+  </div>
+  <div class="mob-section"><div class="mob-section-head">Company</div>
+    <a href="about.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">About Us</span></a>
+    <a href="our-clients.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Our Clients</span></a>
+    <a href="contact.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Contact Us</span></a>
+  </div>
+  <a href="contact.html" class="mob-cta">Book a Consultation &rarr;</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob-1"></div>
+  <div class="hero-blob-2"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-left reveal">
+    <div class="hero-badge"><div class="badge-dot"></div><span class="badge-text">Trusted by <em>30+</em> enterprise clients across India</span></div>
+    <h1>We&nbsp;<span class="cycle-wrap"><span class="cycle-word active">Innovate</span><span class="cycle-word">Build</span><span class="cycle-word">Deliver</span><span class="cycle-word">Transform</span></span><br>for Modern<br>Business.</h1>
+    <p class="hero-sub">Perfeito Group brings together end-to-end IT solutions, infrastructure design, and strategic consulting — so your business moves faster and grows further.</p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn-p">Book a Consultation &rarr;</a>
+      <a href="services.html" class="btn-g">Explore Services</a>
+    </div>
+    <div class="hero-clients">
+      <span class="hc-label">Sectors</span>
+      <div class="hc-sep"></div>
+      <div class="hc-logos">
+        <span class="hc-logo">Banking</span><span class="hc-logo">Retail</span><span class="hc-logo">Manufacturing</span><span class="hc-logo">Government</span><span class="hc-logo">Hospitality</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hv-card hv-2 reveal"><div class="hvc-pill"><div class="dot"></div>Infrastructure</div><div class="hvc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div class="hvc-title">Infrastructure Services</div><div class="hvc-body">Design, build and secure your physical and digital environments.</div></div>
+    <div class="hv-card hv-3 reveal"><div class="hvc-pill"><div class="dot"></div>Consulting</div><div class="hvc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="hvc-title">Strategic Consulting</div><div class="hvc-body">E-commerce growth, gifting, CSR and event management.</div></div>
+    <div class="hv-card hv-1 reveal"><div class="hvc-pill"><div class="dot"></div>IT Solutions</div><div class="hvc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8,21 12,17 16,21"/></svg></div><div class="hvc-title">IT Solutions</div><div class="hvc-body">Retail &amp; hospitality automation, BFSI, manufacturing &amp; enterprise tech.</div><div class="hvc-stat"><span class="hvc-stat-val">15+</span><span class="hvc-stat-lbl">Enterprise Deployments</span></div></div>
+    <div class="hv-badge hv-b1"><div class="hvb-val">100+</div><div class="hvb-lbl">Expert Years</div></div>
+    <div class="hv-badge hv-b2"><div class="hvb-val">4+</div><div class="hvb-lbl">Years Active</div></div>
+  </div>
+</section>
+
+<!-- TAPE -->
+<div class="tape" aria-hidden="true">
+  <div class="tape-inner">Innovate <span class="dot">&middot;</span> Build <span class="dot">&middot;</span> Deliver <span class="dot">&middot;</span> Transform <span class="dot">&middot;</span> IT Solutions <span class="dot">&middot;</span> BFSI <span class="dot">&middot;</span> Retail <span class="dot">&middot;</span> Manufacturing <span class="dot">&middot;</span> Infrastructure <span class="dot">&middot;</span> Consulting <span class="dot">&middot;</span> New Delhi <span class="dot">&middot;</span> Greater Noida <span class="dot">&middot;</span> Perfeito Group <span class="dot">&middot;</span>&nbsp;&nbsp;Innovate <span class="dot">&middot;</span> Build <span class="dot">&middot;</span> Deliver <span class="dot">&middot;</span> Transform <span class="dot">&middot;</span> IT Solutions <span class="dot">&middot;</span> BFSI <span class="dot">&middot;</span> Retail <span class="dot">&middot;</span> Manufacturing <span class="dot">&middot;</span> Infrastructure <span class="dot">&middot;</span> Consulting <span class="dot">&middot;</span> New Delhi <span class="dot">&middot;</span> Greater Noida <span class="dot">&middot;</span> Perfeito Group <span class="dot">&middot;</span></div>
+</div>
+
+<!-- LOGO / CLIENT STRIP -->
+<div class="logo-strip">
+  <div class="ls-track">
+    <div class="ls-inner">
+      <span class="ls-name">Axis Bank</span><span class="ls-sep">/</span>
+      <span class="ls-name">HDFC Bank</span><span class="ls-sep">/</span>
+      <span class="ls-name">State Bank of India</span><span class="ls-sep">/</span>
+      <span class="ls-name">Reliance Retail</span><span class="ls-sep">/</span>
+      <span class="ls-name">Hindustan Unilever</span><span class="ls-sep">/</span>
+      <span class="ls-name">Maruti Suzuki</span><span class="ls-sep">/</span>
+      <span class="ls-name">NTPC Limited</span><span class="ls-sep">/</span>
+      <span class="ls-name">Indian Oil Corp</span><span class="ls-sep">/</span>
+      <span class="ls-name">Wipro</span><span class="ls-sep">/</span>
+      <span class="ls-name">HCL Technologies</span><span class="ls-sep">/</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ls-name">Axis Bank</span><span class="ls-sep">/</span>
+      <span class="ls-name">HDFC Bank</span><span class="ls-sep">/</span>
+      <span class="ls-name">State Bank of India</span><span class="ls-sep">/</span>
+      <span class="ls-name">Reliance Retail</span><span class="ls-sep">/</span>
+      <span class="ls-name">Hindustan Unilever</span><span class="ls-sep">/</span>
+      <span class="ls-name">Maruti Suzuki</span><span class="ls-sep">/</span>
+      <span class="ls-name">NTPC Limited</span><span class="ls-sep">/</span>
+      <span class="ls-name">Indian Oil Corp</span><span class="ls-sep">/</span>
+      <span class="ls-name">Wipro</span><span class="ls-sep">/</span>
+      <span class="ls-name">HCL Technologies</span><span class="ls-sep">/</span>
+    </div>
+  </div>
+</div>
+
+<!-- SOLUTIONS 6-GRID -->
+<section class="sec services-sec" id="services">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <span class="eyebrow">Our Solutions</span>
+      <h2 class="s-title">End-to-End Solutions for<br>Every Business Need.</h2>
+      <p class="s-sub">From technology deployments to infrastructure design and strategic consulting — one partner, every growth channel.</p>
+    </div>
+    <div class="srv-grid-6">
+      <a href="retail-hospitality.html" class="srv-card reveal">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="srv-cat">IT Solutions</div>
+        <div class="srv-title">Retail &amp; Hospitality</div>
+        <p class="srv-body">POS systems, self-checkouts, KDS, digital signage, RFID, hotel management and omni-channel retail solutions.</p>
+        <div class="srv-tags"><span class="srv-tag">POS &amp; Peripherals</span><span class="srv-tag">Self Checkout</span><span class="srv-tag">Hotel Mgmt</span></div>
+        <div class="srv-arrow">Learn More &rarr;</div>
+      </a>
+      <a href="banking-finance-solutions.html" class="srv-card reveal">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16,7 12,3 8,7"/><line x1="12" y1="12" x2="12" y2="17"/></svg></div>
+        <div class="srv-cat">IT Solutions</div>
+        <div class="srv-title">BFSI Technology</div>
+        <p class="srv-body">Kiosk teller systems, core banking, digital signage, data center management, cyber security and QR payment solutions.</p>
+        <div class="srv-tags"><span class="srv-tag">Core Banking</span><span class="srv-tag">Cyber Security</span><span class="srv-tag">LOS / LMS</span></div>
+        <div class="srv-arrow">Learn More &rarr;</div>
+      </a>
+      <a href="manufacturing-industry.html" class="srv-card reveal">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="srv-cat">IT Solutions</div>
+        <div class="srv-title">Manufacturing Industry</div>
+        <p class="srv-body">Data centre infrastructure, networking, end-user computing, enterprise servers, video conferencing and FMS.</p>
+        <div class="srv-tags"><span class="srv-tag">Data Centre</span><span class="srv-tag">Enterprise Servers</span><span class="srv-tag">FMS</span></div>
+        <div class="srv-arrow">Learn More &rarr;</div>
+      </a>
+      <a href="enterprise-it-solutions.html" class="srv-card reveal">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+        <div class="srv-cat">IT Solutions</div>
+        <div class="srv-title">Enterprise Solutions</div>
+        <p class="srv-body">Cloud management, ITMS, network management, digital signage, campaign management and access monitoring at scale.</p>
+        <div class="srv-tags"><span class="srv-tag">Cloud Mgmt</span><span class="srv-tag">ITMS</span><span class="srv-tag">Access Control</span></div>
+        <div class="srv-arrow">Learn More &rarr;</div>
+      </a>
+      <a href="services.html#infra" class="srv-card reveal">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+        <div class="srv-cat">Infrastructure</div>
+        <div class="srv-title">Infrastructure Services</div>
+        <p class="srv-body">Design &amp; build, interior/exterior furniture, surveillance &amp; security systems, and civil infrastructure delivered end-to-end.</p>
+        <div class="srv-tags"><span class="srv-tag">Design &amp; Build</span><span class="srv-tag">CCTV</span><span class="srv-tag">Civil Works</span></div>
+        <div class="srv-arrow">Learn More &rarr;</div>
+      </a>
+      <a href="services.html#consulting" class="srv-card reveal">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="srv-cat">Consulting</div>
+        <div class="srv-title">Consulting Services</div>
+        <p class="srv-body">E-commerce growth strategy, corporate gifting, CSR project management, and events &amp; promotional campaigns.</p>
+        <div class="srv-tags"><span class="srv-tag">E-commerce</span><span class="srv-tag">Gifting</span><span class="srv-tag">Events</span></div>
+        <div class="srv-arrow">Learn More &rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-sec">
+  <div class="stats-inner">
+    <div class="stat-cell reveal"><div class="stat-num" data-target="30">0<em>+</em></div><div class="stat-lbl">Happy Clients</div></div>
+    <div class="stat-cell reveal"><div class="stat-num" data-target="4">0<em>+</em></div><div class="stat-lbl">Years of Excellence</div></div>
+    <div class="stat-cell reveal"><div class="stat-num" data-target="20">0<em>+</em></div><div class="stat-lbl">Brand Collaborations</div></div>
+    <div class="stat-cell reveal"><div class="stat-num" data-target="100">0<em>+</em></div><div class="stat-lbl">Combined Expert Years</div></div>
+    <div class="stat-cell reveal"><div class="stat-num" data-target="8">0<em>+</em></div><div class="stat-lbl">Industry Verticals</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec about-sec">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="av-main">
+          <div class="avm-label">Our Performance</div>
+          <div class="avm-hed">Growth built on<br><span>intelligence</span> and trust.</div>
+          <div class="avm-metrics">
+            <div class="avm-m"><div class="avm-val">30<em>+</em></div><div class="avm-lbl">Enterprise Clients</div></div>
+            <div class="avm-m"><div class="avm-val"><em>98%</em></div><div class="avm-lbl">Client Retention</div></div>
+            <div class="avm-m"><div class="avm-val">20<em>+</em></div><div class="avm-lbl">Brand Partners</div></div>
+            <div class="avm-m"><div class="avm-val"><em>3</em></div><div class="avm-lbl">Service Verticals</div></div>
+          </div>
+        </div>
+        <div class="av-float"><div class="avf-title">Extended Team Model</div><div class="avf-sub">We embed into your business and take full ownership of every outcome.</div></div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Why Choose Perfeito</span>
+        <h2 class="s-title">We Don&rsquo;t Just<br>Deliver. We Own<br>Your Success.</h2>
+        <p class="s-sub">Based in New Delhi and Greater Noida, Perfeito Group operates as a true extension of your team — with full accountability for every engagement since 2019.</p>
+        <div class="about-points">
+          <div class="ap"><div class="ap-num">01</div><div><div class="ap-title">Full-stack capability</div><p class="ap-body">Technology, infrastructure and consulting — every layer covered under one roof, no third-party handoffs.</p></div></div>
+          <div class="ap"><div class="ap-num">02</div><div><div class="ap-title">Trusted by enterprises, SMEs &amp; PSUs</div><p class="ap-body">Our client base spans banking, government, retail, hospitality, manufacturing and more.</p></div></div>
+          <div class="ap"><div class="ap-num">03</div><div><div class="ap-title">AI-led, data-first approach</div><p class="ap-body">We leverage AI technologies for efficiency, cost reduction, compliance and superior customer experience.</p></div></div>
+          <div class="ap"><div class="ap-num">04</div><div><div class="ap-title">Zero black boxes. Total transparency.</div><p class="ap-body">Clear communication, honest timelines, and accountable delivery on every project we take on.</p></div></div>
+        </div>
+        <div style="margin-top:28px;display:flex;gap:12px"><a href="about.html" class="btn-p">Meet the Team &rarr;</a><a href="our-clients.html" class="btn-g">Our Clients</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAN-INDIA REACH -->
+<section class="sec reach-sec">
+  <div class="wrap">
+    <div class="reach-grid">
+      <div class="reveal">
+        <div class="reach-visual">
+          <div class="rv-num">8<span>+</span></div>
+          <div class="rv-lbl">Industry Verticals Served</div>
+          <div class="rv-grid">
+            <div class="rv-tag"><span class="flag">&#127981;</span>Banking &amp; BFSI</div>
+            <div class="rv-tag"><span class="flag">&#127968;</span>Government &amp; PSUs</div>
+            <div class="rv-tag"><span class="flag">&#128722;</span>Retail &amp; E-comm</div>
+            <div class="rv-tag"><span class="flag">&#127970;</span>Manufacturing</div>
+            <div class="rv-tag"><span class="flag">&#127970;</span>Hospitality</div>
+            <div class="rv-tag"><span class="flag">&#128081;</span>Corporate SMEs</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Our Reach</span>
+        <h2 class="s-title">Serving Enterprise<br>India Since 2019.</h2>
+        <p class="s-sub">Headquartered in New Delhi with operations in Greater Noida West, we deliver for enterprise clients across India&rsquo;s most dynamic sectors.</p>
+        <div class="reach-features">
+          <div class="rf"><div class="rf-dot"></div><div><div class="rf-title">Banking &amp; Finance Technology</div><p class="rf-body">Self-check-in kiosks, core banking solutions, digital signage and cyber-security for leading banks and NBFCs.</p></div></div>
+          <div class="rf"><div class="rf-dot"></div><div><div class="rf-title">Retail &amp; Manufacturing Automation</div><p class="rf-body">POS systems, ERP integration, shop-floor automation and end-to-end digital transformation for retail chains and manufacturers.</p></div></div>
+          <div class="rf"><div class="rf-dot"></div><div><div class="rf-title">Government &amp; PSU Deployments</div><p class="rf-body">Trusted by PSUs and government bodies for IT infrastructure, surveillance systems and civil infrastructure projects.</p></div></div>
+        </div>
+        <div style="margin-top:28px"><a href="contact.html" class="btn-p">Get a Free Consultation &rarr;</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="sec ind-sec" id="industries">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <span class="eyebrow">Industries We Serve</span>
+      <h2 class="s-title">Built for Every Sector</h2>
+      <p class="s-sub">Deep domain expertise across the industries that matter most — from banking to retail to government and beyond.</p>
+    </div>
+    <div class="ind-grid reveal">
+      <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16,7 12,3 8,7"/><line x1="12" y1="12" x2="12" y2="17"/></svg></div><div class="ind-name">Banking &amp; BFSI</div></div>
+      <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div><div class="ind-name">Government &amp; PSUs</div></div>
+      <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.95-1.57L23 6H6"/></svg></div><div class="ind-name">Retail &amp; E-commerce</div></div>
+      <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><rect x="9" y="13" width="6" height="8"/></svg></div><div class="ind-name">Hospitality</div></div>
+      <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="ind-name">Manufacturing</div></div>
+      <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div><div class="ind-name">Corporates &amp; SMEs</div></div>
+      <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg></div><div class="ind-name">CSR &amp; NGOs</div></div>
+      <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="ind-name">Events &amp; Promotions</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="sec cases-sec" style="background:var(--off)">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <span class="eyebrow">Success Stories</span>
+      <h2 class="s-title">Real Results.<br>Real Partnerships.</h2>
+      <p class="s-sub">Numbers that moved the needle for India&rsquo;s most demanding enterprises.</p>
+    </div>
+    <div class="cases-grid reveal">
+      <div class="case-card">
+        <div class="cc-top c1"></div>
+        <div class="cc-body">
+          <div class="cc-tag">Banking &amp; BFSI</div>
+          <div class="cc-brand">Leading NBFC</div>
+          <p class="cc-desc">Deployed end-to-end IT infrastructure including self-check-in kiosk systems, structured cabling, and cyber-security framework across 12 branch locations.</p>
+          <div class="cc-divider"></div>
+          <div class="cc-metrics">
+            <div><div class="ccm-val">12</div><div class="ccm-lbl">Branches Deployed</div></div>
+            <div><div class="ccm-val">40%</div><div class="ccm-lbl">Ops Cost Reduction</div></div>
+          </div>
+        </div>
+        <div class="cc-foot"><span class="cc-service">IT Solutions + Infrastructure</span><a href="contact.html" class="cc-link">Discuss a Project &rarr;</a></div>
+      </div>
+      <div class="case-card">
+        <div class="cc-top c2"></div>
+        <div class="cc-body">
+          <div class="cc-tag">Retail Chain</div>
+          <div class="cc-brand">Multi-City Retailer</div>
+          <p class="cc-desc">Implemented POS systems, self-checkout kiosks, EAS anti-theft solutions and digital signage across 25+ retail outlets, improving throughput and reducing shrinkage.</p>
+          <div class="cc-divider"></div>
+          <div class="cc-metrics">
+            <div><div class="ccm-val">25+</div><div class="ccm-lbl">Stores Upgraded</div></div>
+            <div><div class="ccm-val">28%</div><div class="ccm-lbl">Shrinkage Reduced</div></div>
+          </div>
+        </div>
+        <div class="cc-foot"><span class="cc-service">Retail IT Solutions</span><a href="contact.html" class="cc-link">Discuss a Project &rarr;</a></div>
+      </div>
+      <div class="case-card">
+        <div class="cc-top c3"></div>
+        <div class="cc-body">
+          <div class="cc-tag">Manufacturing Enterprise</div>
+          <div class="cc-brand">Industrial Group</div>
+          <p class="cc-desc">Full digital transformation covering data centre infrastructure, enterprise servers, video conferencing systems and FMS deployment across 3 manufacturing plants.</p>
+          <div class="cc-divider"></div>
+          <div class="cc-metrics">
+            <div><div class="ccm-val">3</div><div class="ccm-lbl">Plants Transformed</div></div>
+            <div><div class="ccm-val">35%</div><div class="ccm-lbl">Efficiency Gain</div></div>
+          </div>
+        </div>
+        <div class="cc-foot"><span class="cc-service">Manufacturing IT + Infrastructure</span><a href="contact.html" class="cc-link">Discuss a Project &rarr;</a></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px"><a href="our-clients.html" class="btn-p">View All Case Studies &rarr;</a></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec testi-sec">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <span class="eyebrow">Client Stories</span>
+      <h2 class="s-title">Trusted. Proven. Recommended.</h2>
+      <p class="s-sub">What our clients say about working with Perfeito Group.</p>
+    </div>
+  </div>
+  <div class="testi-track-wrap reveal">
+    <div class="testi-track">
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"Perfeito transformed our network infrastructure completely. Delivered on time, within budget, and with zero disruption to operations. Exceptional execution."</p><div class="tc-author"><div class="tc-avatar">RK</div><div><div class="tc-name">Rahul Kumar</div><div class="tc-role">IT Head, Leading NBFC</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"The office design and interior project was handled with incredible attention to detail. Perfeito understood our brand vision from day one and delivered something truly impressive."</p><div class="tc-author"><div class="tc-avatar">PS</div><div><div class="tc-name">Priya Sharma</div><div class="tc-role">Director, Real Estate Firm</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"Their e-commerce consulting helped us build a strong digital presence from scratch. Practical, data-backed, and genuinely results-driven. Couldn&rsquo;t recommend them more."</p><div class="tc-author"><div class="tc-avatar">AM</div><div><div class="tc-name">Arjun Malhotra</div><div class="tc-role">Founder, D2C Brand</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"Perfeito managed our corporate gifting program seamlessly — 500+ employees, 8 cities, on-time delivery. Highly recommend for large-scale corporate projects."</p><div class="tc-author"><div class="tc-avatar">NV</div><div><div class="tc-name">Neha Verma</div><div class="tc-role">HR Manager, Fortune 500 Co.</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"The surveillance system installed across our retail chain is outstanding. Real-time monitoring, excellent hardware, and post-installation support has been top-notch throughout."</p><div class="tc-author"><div class="tc-avatar">SK</div><div><div class="tc-name">Sanjay Kapoor</div><div class="tc-role">Operations Head, Retail Chain</div></div></div></div>
+      <!-- Duplicates -->
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"Perfeito transformed our network infrastructure completely. Delivered on time, within budget, and with zero disruption to operations. Exceptional execution."</p><div class="tc-author"><div class="tc-avatar">RK</div><div><div class="tc-name">Rahul Kumar</div><div class="tc-role">IT Head, Leading NBFC</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"The office design and interior project was handled with incredible attention to detail. Perfeito understood our brand vision from day one and delivered something truly impressive."</p><div class="tc-author"><div class="tc-avatar">PS</div><div><div class="tc-name">Priya Sharma</div><div class="tc-role">Director, Real Estate Firm</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"Their e-commerce consulting helped us build a strong digital presence from scratch. Practical, data-backed, and genuinely results-driven. Couldn&rsquo;t recommend them more."</p><div class="tc-author"><div class="tc-avatar">AM</div><div><div class="tc-name">Arjun Malhotra</div><div class="tc-role">Founder, D2C Brand</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"Perfeito managed our corporate gifting program seamlessly — 500+ employees, 8 cities, on-time delivery. Highly recommend for large-scale corporate projects."</p><div class="tc-author"><div class="tc-avatar">NV</div><div><div class="tc-name">Neha Verma</div><div class="tc-role">HR Manager, Fortune 500 Co.</div></div></div></div>
+      <div class="testi-card"><div class="tc-stars"><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span></div><p class="tc-quote">"The surveillance system installed across our retail chain is outstanding. Real-time monitoring, excellent hardware, and post-installation support has been top-notch throughout."</p><div class="tc-author"><div class="tc-avatar">SK</div><div><div class="tc-name">Sanjay Kapoor</div><div class="tc-role">Operations Head, Retail Chain</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="wrap">
+    <div class="cta-grid reveal">
+      <div>
+        <span class="cta-eyebrow">Ready to Begin?</span>
+        <h2 class="cta-hed">Let&rsquo;s Build Something<br><em>Extraordinary</em> Together.</h2>
+        <p class="cta-deck">No pitch decks. No fluff. Just an honest conversation about your business and what&rsquo;s genuinely possible with the right partner.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn-cta">Book a Free Consultation &rarr;</a>
+        <a href="services.html" class="btn-cta-ghost">Explore All Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div>
+      <div class="foot-logo"><div class="f-logo-icon"><svg viewBox="0 0 22 22" fill="none"><path d="M11 2L3 18h16L11 2z" fill="white" opacity="0.9"/><path d="M11 9L7.5 18h7L11 9z" fill="white" opacity="0.4"/></svg></div><span class="f-logo-name">PERFEITO GROUP</span></div>
+      <p class="foot-desc">Your end-to-end partner in IT solutions, infrastructure design, and strategic consulting. Trusted by enterprises, SMEs and PSUs since 2019.</p>
+      <div class="foot-contact-items">
+        <span class="fci"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.63a19.79 19.79 0 01-3.07-8.7A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>+91-9910-324923</span>
+        <span class="fci"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>virendra@perfeitogroup.com</span>
+        <span class="fci"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>New Delhi &amp; Greater Noida West</span>
+      </div>
+    </div>
+    <div>
+      <div class="foot-col-head">IT Solutions</div>
+      <ul class="foot-links">
+        <li><a href="retail-hospitality.html">Retail &amp; Hospitality</a></li>
+        <li><a href="banking-finance-solutions.html">BFSI Technology</a></li>
+        <li><a href="manufacturing-industry.html">Manufacturing Industry</a></li>
+        <li><a href="enterprise-it-solutions.html">Enterprise Solutions</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-head">Services</div>
+      <ul class="foot-links">
+        <li><a href="design-build.html">Design &amp; Build</a></li>
+        <li><a href="surveillance-and-security.html">Surveillance &amp; Security</a></li>
+        <li><a href="ecommerce-services.html">Ecommerce Services</a></li>
+        <li><a href="gifting.html">Corporate Gifting</a></li>
+        <li><a href="events-promotions.html">Events &amp; Promotions</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-head">Company</div>
+      <ul class="foot-links">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="our-clients.html">Our Clients</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="index.html#industries">Industries</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span class="foot-copy">&copy; 2024 Perfeito Group. All Rights Reserved.</span>
+    <div class="foot-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919910324923" class="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.11 1.523 5.836L.057 23.456a.5.5 0 00.487.544.5.5 0 00.14-.02l5.773-1.505A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.957 9.957 0 01-5.184-1.453l-.371-.22-3.836 1.004 1.02-3.724-.242-.383A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})();
+document.querySelectorAll('a,button,.srv-card,.ind-item,.ap').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';cur.style.background='var(--indigo)';ring.style.opacity='0'});el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';cur.style.background='var(--blue)';ring.style.opacity='1'})});
+// Nav scroll
+const nav=document.getElementById('nav'),sb=document.getElementById('scrollBar');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>40);sb.style.width=(scrollY/(document.body.scrollHeight-innerHeight))*100+'%'},{passive:true});
+// Word cycle
+const words=document.querySelectorAll('.cycle-word');let cw=0;
+setInterval(()=>{words[cw].classList.remove('active');cw=(cw+1)%words.length;words[cw].classList.add('active')},2200);
+// Reveal
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%5)*80+'ms';obs.observe(el);const r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)setTimeout(()=>el.classList.add('in'),i*55)});
+// Count-up
+const cObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,t=+el.dataset.target,em=el.querySelector('em');let n=0;const s=Math.ceil(t/40),ti=setInterval(()=>{n=Math.min(n+s,t);el.childNodes[0].nodeValue=n;if(n>=t)clearInterval(ti)},40);cObs.unobserve(el)})},{threshold:.5});
+document.querySelectorAll('.stat-num[data-target]').forEach(el=>cObs.observe(el));
+// Hamburger
+const ham=document.getElementById('hamburger'),mob=document.getElementById('mobNav');
+if(ham&&mob){ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''})};
+// Close mobile nav on link click
+mob&&mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open');document.body.style.overflow=''}));
+</script>
+</body>
+</html>

@@ -171,6 +171,82 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 .srv-arrow{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--blue);margin-top:16px;transition:gap .18s;font-family:var(--inter)}
 .srv-card:hover .srv-arrow{gap:9px}
 
+/* ── PROJECTS GRID ──────────────── */
+.projects-sec{background:var(--off)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:16px;margin-top:52px}
+.proj-card{border-radius:20px;overflow:hidden;position:relative;cursor:pointer;transition:transform .28s ease,box-shadow .28s ease}
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 28px 60px rgba(0,0,0,0.14)}
+.proj-card.wide{grid-column:span 2}
+.proj-thumb{width:100%;height:100%;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;position:relative;overflow:hidden}
+.proj-thumb::before{content:'';position:absolute;inset:0;background:inherit;z-index:0}
+.proj-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,9,26,0.75) 0%,transparent 55%);z-index:1}
+.pt-blue{background:linear-gradient(135deg,#1B4FD8 0%,#4F46E5 100%)}
+.pt-green{background:linear-gradient(135deg,#059669 0%,#10B981 100%)}
+.pt-dark{background:linear-gradient(135deg,#0E1526 0%,#1a2744 100%)}
+.pt-orange{background:linear-gradient(135deg,#D97706 0%,#F59E0B 100%)}
+.pt-purple{background:linear-gradient(135deg,#7C3AED 0%,#A855F7 100%)}
+.proj-thumb .proj-dots{position:absolute;inset:0;z-index:0;background-image:radial-gradient(circle,rgba(255,255,255,0.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.proj-meta{position:relative;z-index:2}
+.proj-tag{display:inline-block;font-size:10px;font-weight:700;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.12em;border:1px solid rgba(255,255,255,0.2);padding:3px 10px;border-radius:100px;margin-bottom:10px;font-family:var(--inter);background:rgba(255,255,255,0.06)}
+.proj-name{font-family:var(--syne);font-size:18px;font-weight:800;color:#fff;line-height:1.2;letter-spacing:-0.02em;margin-bottom:6px}
+.proj-stat{font-size:12px;color:rgba(255,255,255,0.5);font-family:var(--inter)}
+.proj-arrow-btn{position:absolute;top:20px;right:20px;z-index:2;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);display:grid;place-items:center;transition:all .2s;text-decoration:none}
+.proj-arrow-btn:hover{background:rgba(255,255,255,0.25)}
+.proj-arrow-btn svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none}
+
+/* ── JOURNEY ─────────────────────── */
+.journey-sec{background:var(--dark);padding:96px 48px;position:relative;overflow:hidden}
+.journey-sec::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(circle,rgba(27,79,216,0.06) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.journey-sec .sec-hdr .eyebrow{color:#60A5FA}
+.journey-sec .sec-hdr .eyebrow::before{background:#60A5FA}
+.journey-sec .sec-hdr .s-title{color:#fff}
+.journey-sec .sec-hdr .s-sub{color:rgba(255,255,255,0.4)}
+.journey-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:56px;position:relative}
+.journey-grid::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1px;height:calc(100% - 80px);background:rgba(255,255,255,0.07)}
+.journey-grid::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:1px;width:calc(100% - 80px);background:rgba(255,255,255,0.07)}
+.jstep{padding:40px;position:relative}
+.jstep:nth-child(1){border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06)}
+.jstep:nth-child(2){border-bottom:1px solid rgba(255,255,255,0.06)}
+.jstep:nth-child(3){border-right:1px solid rgba(255,255,255,0.06)}
+.js-num{font-family:var(--syne);font-size:11px;font-weight:800;color:var(--blue);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.js-num::after{content:'';flex:1;height:1px;background:rgba(27,79,216,0.3)}
+.js-year{font-family:var(--syne);font-size:42px;font-weight:800;color:rgba(255,255,255,0.07);letter-spacing:-0.04em;line-height:1;position:absolute;top:28px;right:32px}
+.js-title{font-family:var(--syne);font-size:20px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.02em}
+.js-body{font-size:13.5px;color:rgba(255,255,255,0.4);line-height:1.7;font-family:var(--inter)}
+.js-icon{width:44px;height:44px;border-radius:12px;background:rgba(27,79,216,0.15);border:1px solid rgba(27,79,216,0.25);display:grid;place-items:center;margin-bottom:20px}
+.js-icon svg{width:20px;height:20px;stroke:#60A5FA;stroke-width:1.75;fill:none}
+
+/* ── ACHIEVEMENTS ────────────────── */
+.ach-sec{background:var(--white)}
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.ach-left{position:relative}
+.ach-big{font-family:var(--syne);font-weight:800;letter-spacing:-0.05em;line-height:.9;position:relative;display:inline-block}
+.ach-n1{font-size:clamp(100px,14vw,180px);color:var(--blue);display:block;background:linear-gradient(135deg,#1B4FD8,#4F46E5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ach-n2{font-size:clamp(100px,14vw,180px);color:var(--text);display:block;opacity:.08}
+.ach-dots-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(27,79,216,0.15) 1.5px,transparent 1.5px);background-size:22px 22px;z-index:-1;border-radius:24px}
+.ach-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-top:20px;font-family:var(--inter)}
+.ach-list{display:flex;flex-direction:column;gap:0}
+.ach-item{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--border)}
+.ach-item:last-child{border-bottom:none}
+.ach-idx{font-family:var(--syne);font-size:11px;font-weight:800;color:var(--blue);width:28px;flex-shrink:0;padding-top:3px}
+.ach-content{}
+.ach-ach{font-family:var(--syne);font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
+.ach-desc{font-size:13px;color:var(--mid);line-height:1.58;font-family:var(--inter)}
+
+/* ── TEAM PREVIEW ────────────────── */
+.team-sec{background:var(--off)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px}
+.team-card{background:var(--white);border:1.5px solid var(--border);border-radius:18px;padding:28px 22px;text-align:center;transition:all .25s}
+.team-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.07);border-color:rgba(27,79,216,0.15)}
+.team-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;font-family:var(--syne);font-size:22px;font-weight:800;color:#fff}
+.ta-1{background:linear-gradient(135deg,#1B4FD8,#4F46E5)}
+.ta-2{background:linear-gradient(135deg,#059669,#10B981)}
+.ta-3{background:linear-gradient(135deg,#D97706,#F59E0B)}
+.ta-4{background:linear-gradient(135deg,#7C3AED,#A855F7)}
+.team-name{font-family:var(--syne);font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.team-role{font-size:12px;color:var(--muted);font-family:var(--inter);margin-bottom:14px}
+.team-dept{display:inline-block;font-size:10px;font-weight:700;color:var(--blue);background:var(--blue-glow);border:1px solid rgba(27,79,216,0.12);padding:3px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:.08em;font-family:var(--inter)}
+
 /* ── STATS ───────────────────────── */
 .stats-sec{background:var(--dark);padding:0 48px}
 .stats-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
@@ -320,20 +396,23 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
 /* ── RESPONSIVE ─────────────────── */
 @media(max-width:1024px){
   nav{padding:0 28px}.hero{padding:90px 28px 60px;gap:36px}.sec{padding:72px 28px}
-  .stats-sec,.cta-sec{padding-left:28px;padding-right:28px}
+  .stats-sec,.cta-sec,.journey-sec{padding-left:28px;padding-right:28px}
   .srv-grid-6{grid-template-columns:1fr 1fr}
-  .about-grid,.reach-grid{grid-template-columns:1fr;gap:48px}
+  .about-grid,.reach-grid,.ach-grid{grid-template-columns:1fr;gap:48px}
   .about-visual{order:-1}.av-float{bottom:-16px;right:-8px}
   .cta-grid{grid-template-columns:1fr;gap:40px}
   .foot-top{grid-template-columns:1fr 1fr;gap:36px}
   footer{padding:52px 28px 24px}
+  .proj-grid{grid-template-columns:1fr 1fr}
+  .proj-card.wide{grid-column:span 2}
+  .team-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
   nav{padding:0 20px}
   .nav-menu{display:none}.nav-cta{display:none}.hamburger{display:flex}.mob-nav{display:block}
   .hero{flex-direction:column;padding:80px 20px 48px;text-align:center}
   .hero-right{display:none}.hero-clients{justify-content:center}.hero-sub{margin-left:auto;margin-right:auto}.hero-btns{justify-content:center}
-  .sec{padding:60px 20px}.stats-sec{padding:0 20px}
+  .sec{padding:60px 20px}.stats-sec{padding:0 20px}.journey-sec{padding:64px 20px}
   .stats-inner{grid-template-columns:1fr 1fr}
   .stat-cell{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
   .stat-cell:nth-child(2n){border-right:none}.stat-cell:last-child{border-bottom:none}
@@ -345,6 +424,13 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
   footer{padding:48px 20px 22px}
   .foot-bottom{flex-direction:column;gap:10px;text-align:center}
   .logo-strip{padding:16px 0}
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card.wide{grid-column:span 1}
+  .journey-grid{grid-template-columns:1fr}
+  .jstep:nth-child(1),.jstep:nth-child(3){border-right:none}
+  .jstep{border-bottom:1px solid rgba(255,255,255,0.06) !important;border-right:none !important}
+  .ach-big .ach-n1,.ach-big .ach-n2{font-size:clamp(80px,22vw,120px)}
+  .team-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -572,6 +658,80 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
   </div>
 </section>
 
+<!-- PROJECTS SHOWCASE -->
+<section class="sec projects-sec">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <span class="eyebrow">Our Work</span>
+      <h2 class="s-title">Projects That Define Us.</h2>
+      <p class="s-sub">A snapshot of transformative work delivered across banking, retail, manufacturing and more.</p>
+    </div>
+    <div class="proj-grid">
+      <!-- Wide card -->
+      <div class="proj-card wide reveal">
+        <div class="proj-thumb pt-blue">
+          <div class="proj-dots"></div>
+          <a href="banking-finance-solutions.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
+          <div class="proj-meta">
+            <span class="proj-tag">BFSI · Digital Transformation</span>
+            <div class="proj-name">Branch Digital Overhaul<br>— Leading PSU Bank</div>
+            <div class="proj-stat">50 branches &middot; Kiosk tellers, digital signage, CCTV &middot; 40% queue reduction</div>
+          </div>
+        </div>
+      </div>
+      <!-- Small card -->
+      <div class="proj-card reveal">
+        <div class="proj-thumb pt-green">
+          <div class="proj-dots"></div>
+          <a href="retail-hospitality.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
+          <div class="proj-meta">
+            <span class="proj-tag">Retail · POS Rollout</span>
+            <div class="proj-name">25-Store POS &amp; EAS Deployment</div>
+            <div class="proj-stat">28% shrinkage reduced &middot; Pan-India</div>
+          </div>
+        </div>
+      </div>
+      <!-- Small card -->
+      <div class="proj-card reveal">
+        <div class="proj-thumb pt-dark">
+          <div class="proj-dots"></div>
+          <a href="manufacturing-industry.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
+          <div class="proj-meta">
+            <span class="proj-tag">Manufacturing · IT Infra</span>
+            <div class="proj-name">3-Plant Digital Infrastructure Build</div>
+            <div class="proj-stat">Data centre, networking, EUC, FMS</div>
+          </div>
+        </div>
+      </div>
+      <!-- Small card -->
+      <div class="proj-card reveal">
+        <div class="proj-thumb pt-orange">
+          <div class="proj-dots"></div>
+          <a href="ecommerce-services.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
+          <div class="proj-meta">
+            <span class="proj-tag">Ecommerce · D2C Growth</span>
+            <div class="proj-name">D2C Brand Scale-Up — 3× Revenue</div>
+            <div class="proj-stat">Marketplace + performance marketing</div>
+          </div>
+        </div>
+      </div>
+      <!-- Wide card -->
+      <div class="proj-card wide reveal">
+        <div class="proj-thumb pt-purple">
+          <div class="proj-dots"></div>
+          <a href="enterprise-it-solutions.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
+          <div class="proj-meta">
+            <span class="proj-tag">Enterprise · Cloud &amp; IT Managed Services</span>
+            <div class="proj-name">Hybrid Cloud Migration &amp; ITMS<br>— 5,000-seat Corporate</div>
+            <div class="proj-stat">Azure migration &middot; 24/7 NOC &middot; 99.9% uptime SLA achieved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px"><a href="our-clients.html" class="btn-p">View All Projects &rarr;</a></div>
+  </div>
+</section>
+
 <!-- STATS -->
 <div class="stats-sec">
   <div class="stats-inner">
@@ -649,6 +809,47 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
   </div>
 </section>
 
+<!-- JOURNEY -->
+<section class="journey-sec">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <span class="eyebrow">Our Journey</span>
+      <h2 class="s-title">How We Grew Into<br>a Trusted Partner.</h2>
+      <p class="s-sub">From a focused IT solutions startup to a full-service enterprise partner — every milestone shaped who we are.</p>
+    </div>
+    <div class="journey-grid">
+      <div class="jstep reveal">
+        <div class="js-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="js-num">01 <span>Foundation</span></div>
+        <div class="js-year">2019</div>
+        <div class="js-title">Perfeito Group Founded</div>
+        <p class="js-body">Incorporated in New Delhi with a clear mandate: deliver enterprise-grade IT solutions to India's banking and retail sectors. First three clients onboarded within 90 days.</p>
+      </div>
+      <div class="jstep reveal">
+        <div class="js-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+        <div class="js-num">02 <span>Expansion</span></div>
+        <div class="js-year">2021</div>
+        <div class="js-title">Infrastructure & Consulting Added</div>
+        <p class="js-body">Expanded beyond IT into physical infrastructure design, interior fit-outs and strategic consulting — becoming a true end-to-end partner for enterprise clients.</p>
+      </div>
+      <div class="jstep reveal">
+        <div class="js-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="js-num">03 <span>Scale</span></div>
+        <div class="js-year">2022</div>
+        <div class="js-title">30+ Enterprise Clients Milestone</div>
+        <p class="js-body">Crossed 30 enterprise relationships spanning PSU banks, retail chains, manufacturers and corporates. Pan-India delivery capability established across 8+ cities.</p>
+      </div>
+      <div class="jstep reveal">
+        <div class="js-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="js-num">04 <span>Today</span></div>
+        <div class="js-year">2024</div>
+        <div class="js-title">Full-Spectrum Enterprise Partner</div>
+        <p class="js-body">Three service verticals, 100+ combined expert years, 98% client retention. Perfeito Group continues to set benchmarks in delivery quality and client satisfaction across India.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- INDUSTRIES -->
 <section class="sec ind-sec" id="industries">
   <div class="wrap">
@@ -666,6 +867,56 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div><div class="ind-name">Corporates &amp; SMEs</div></div>
       <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg></div><div class="ind-name">CSR &amp; NGOs</div></div>
       <div class="ind-item"><div class="ind-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="ind-name">Events &amp; Promotions</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="sec ach-sec">
+  <div class="wrap">
+    <div class="ach-grid">
+      <div class="reveal">
+        <div class="ach-big">
+          <div class="ach-dots-bg"></div>
+          <span class="ach-n1">30</span>
+          <span class="ach-n2">+</span>
+        </div>
+        <div class="ach-label">Enterprise Clients &amp; Growing</div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Our Achievements</span>
+        <h2 class="s-title" style="margin-bottom:32px">Recognition Built<br>on Real Results.</h2>
+        <div class="ach-list">
+          <div class="ach-item">
+            <div class="ach-idx">01</div>
+            <div class="ach-content">
+              <div class="ach-ach">Preferred IT Partner — PSU Banking Sector</div>
+              <p class="ach-desc">Empanelled with multiple public sector banks for IT infrastructure, kiosk deployment and managed services.</p>
+            </div>
+          </div>
+          <div class="ach-item">
+            <div class="ach-idx">02</div>
+            <div class="ach-content">
+              <div class="ach-ach">98% Client Retention Rate</div>
+              <p class="ach-desc">Consistent delivery quality and proactive support keeps clients coming back — year after year.</p>
+            </div>
+          </div>
+          <div class="ach-item">
+            <div class="ach-idx">03</div>
+            <div class="ach-content">
+              <div class="ach-ach">Pan-India Deployment Capability</div>
+              <p class="ach-desc">Simultaneous multi-city rollouts across 8+ cities with certified engineers on the ground.</p>
+            </div>
+          </div>
+          <div class="ach-item">
+            <div class="ach-idx">04</div>
+            <div class="ach-content">
+              <div class="ach-ach">OEM-Authorized Service Partner</div>
+              <p class="ach-desc">Certified by HPE, Dell, Cisco, Hikvision, Posiflex and other leading OEMs for sales and service.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -723,6 +974,44 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       </div>
     </div>
     <div style="text-align:center;margin-top:40px"><a href="our-clients.html" class="btn-p">View All Case Studies &rarr;</a></div>
+  </div>
+</section>
+
+<!-- TEAM PREVIEW -->
+<section class="sec team-sec">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <span class="eyebrow">Our Team</span>
+      <h2 class="s-title">The People Behind<br>Every Delivery.</h2>
+      <p class="s-sub">100+ combined expert years. Certified engineers, strategic consultants and creative professionals — all under one roof.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar ta-1">VK</div>
+        <div class="team-name">Virendra Kumar</div>
+        <div class="team-role">Founder &amp; Managing Director</div>
+        <span class="team-dept">Leadership</span>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar ta-2">RS</div>
+        <div class="team-name">Rajesh Sharma</div>
+        <div class="team-role">Head — IT Solutions</div>
+        <span class="team-dept">IT Solutions</span>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar ta-3">PM</div>
+        <div class="team-name">Priya Mehta</div>
+        <div class="team-role">Head — Infrastructure</div>
+        <span class="team-dept">Infrastructure</span>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar ta-4">AK</div>
+        <div class="team-name">Amit Kapoor</div>
+        <div class="team-role">Head — Consulting</div>
+        <span class="team-dept">Consulting</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px"><a href="about.html" class="btn-g">Meet the Full Team &rarr;</a></div>
   </div>
 </section>
 

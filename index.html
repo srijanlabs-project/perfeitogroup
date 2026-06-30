@@ -97,27 +97,25 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 .hc-sep{width:1px;height:16px;background:var(--border)}
 .hc-logos{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
 .hc-logo{font-size:13px;font-weight:700;color:var(--muted)}
-/* Hero right */
-.hero-right{flex:0 0 44%;position:relative;z-index:2;display:flex;align-items:center;justify-content:center;height:520px}
-.hv-card{position:absolute;background:var(--white);border-radius:20px;padding:28px;box-shadow:0 4px 6px -1px rgba(0,0,0,0.04),0 24px 48px -8px rgba(0,0,0,0.10);border:1px solid var(--border);transition:transform .4s ease}
-.hv-card:hover{transform:translateY(-6px) !important}
-.hv-1{width:280px;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3}
-.hv-2{width:260px;top:42%;left:30%;transform:translate(-50%,-50%) rotate(-5deg);z-index:2;background:var(--off)}
-.hv-3{width:250px;top:58%;left:70%;transform:translate(-50%,-50%) rotate(5deg);z-index:2;background:var(--off)}
-.hvc-pill{display:inline-flex;align-items:center;gap:6px;background:var(--blue-glow);border:1px solid rgba(27,79,216,0.15);padding:4px 10px;border-radius:100px;font-size:10.5px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;font-family:var(--inter)}
-.hvc-pill .dot{width:5px;height:5px;border-radius:50%;background:var(--blue)}
-.hvc-icon{width:42px;height:42px;border-radius:11px;background:var(--off);border:1px solid var(--border);display:grid;place-items:center;margin-bottom:14px}
-.hvc-icon svg{width:22px;height:22px;stroke:var(--blue);stroke-width:1.75;fill:none}
-.hvc-title{font-family:var(--syne);font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px}
-.hvc-body{font-size:12.5px;color:var(--mid);line-height:1.6;font-family:var(--inter)}
-.hvc-stat{display:flex;align-items:baseline;gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border-lt)}
-.hvc-stat-val{font-family:var(--syne);font-size:22px;font-weight:800;color:var(--blue);letter-spacing:-0.02em}
-.hvc-stat-lbl{font-size:11px;color:var(--muted);font-family:var(--inter);font-weight:500}
-.hv-badge{position:absolute;z-index:5;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:12px 16px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
-.hv-b1{top:8%;right:-10px}
-.hv-b2{bottom:6%;left:-10px}
-.hvb-val{font-family:var(--syne);font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.02em;line-height:1}
-.hvb-lbl{font-size:10.5px;color:var(--muted);font-family:var(--inter);font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
+/* Hero right — clean structured layout */
+.hero-right{flex:0 0 42%;position:relative;z-index:2;display:flex;flex-direction:column;gap:12px}
+.hr-panel{background:linear-gradient(145deg,#0E1526,#1a2744);border-radius:22px;padding:32px;position:relative;overflow:hidden}
+.hr-panel::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(27,79,216,0.22) 0%,transparent 70%);pointer-events:none}
+.hr-panel-label{font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.16em;margin-bottom:20px;font-family:var(--inter)}
+.hr-svc-list{display:flex;flex-direction:column;gap:0}
+.hr-svc{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.hr-svc:last-child{border-bottom:none;padding-bottom:0}
+.hr-svc:first-child{padding-top:0}
+.hr-svc-icon{width:40px;height:40px;border-radius:10px;background:rgba(27,79,216,0.2);border:1px solid rgba(27,79,216,0.3);display:grid;place-items:center;flex-shrink:0}
+.hr-svc-icon svg{width:18px;height:18px;stroke:#60A5FA;stroke-width:1.75;fill:none}
+.hr-svc-name{font-family:var(--syne);font-size:14px;font-weight:700;color:#fff;line-height:1.2}
+.hr-svc-sub{font-size:11.5px;color:rgba(255,255,255,0.38);margin-top:2px;font-family:var(--inter)}
+.hr-svc-count{margin-left:auto;font-family:var(--syne);font-size:18px;font-weight:800;color:#60A5FA;flex-shrink:0}
+.hr-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.hr-stat{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:18px 14px;text-align:center}
+.hr-stat-val{font-family:var(--syne);font-size:22px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1}
+.hr-stat-val em{font-style:normal;color:var(--blue)}
+.hr-stat-lbl{font-size:9.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:5px;font-family:var(--inter);line-height:1.3}
 
 /* ── TAPE ─────────────────────────── */
 .tape{background:var(--dark);padding:15px 0;overflow:hidden}
@@ -549,12 +547,48 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       </div>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hv-card hv-2 reveal"><div class="hvc-pill"><div class="dot"></div>Infrastructure</div><div class="hvc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div class="hvc-title">Infrastructure Services</div><div class="hvc-body">Design, build and secure your physical and digital environments.</div></div>
-    <div class="hv-card hv-3 reveal"><div class="hvc-pill"><div class="dot"></div>Consulting</div><div class="hvc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="hvc-title">Strategic Consulting</div><div class="hvc-body">E-commerce growth, gifting, CSR and event management.</div></div>
-    <div class="hv-card hv-1 reveal"><div class="hvc-pill"><div class="dot"></div>IT Solutions</div><div class="hvc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8,21 12,17 16,21"/></svg></div><div class="hvc-title">IT Solutions</div><div class="hvc-body">Retail &amp; hospitality automation, BFSI, manufacturing &amp; enterprise tech.</div><div class="hvc-stat"><span class="hvc-stat-val">15+</span><span class="hvc-stat-lbl">Enterprise Deployments</span></div></div>
-    <div class="hv-badge hv-b1"><div class="hvb-val">100+</div><div class="hvb-lbl">Expert Years</div></div>
-    <div class="hv-badge hv-b2"><div class="hvb-val">4+</div><div class="hvb-lbl">Years Active</div></div>
+  <div class="hero-right reveal">
+    <div class="hr-panel">
+      <div class="hr-panel-label">Our Service Pillars</div>
+      <div class="hr-svc-list">
+        <div class="hr-svc">
+          <div class="hr-svc-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8,21 12,17 16,21"/></svg>
+          </div>
+          <div>
+            <div class="hr-svc-name">IT Solutions</div>
+            <div class="hr-svc-sub">Retail, BFSI, Manufacturing, Enterprise</div>
+          </div>
+          <div class="hr-svc-count">15+</div>
+        </div>
+        <div class="hr-svc">
+          <div class="hr-svc-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <div>
+            <div class="hr-svc-name">Infrastructure</div>
+            <div class="hr-svc-sub">Design, Build, Surveillance, Civil</div>
+          </div>
+          <div class="hr-svc-count">20+</div>
+        </div>
+        <div class="hr-svc">
+          <div class="hr-svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <div class="hr-svc-name">Consulting</div>
+            <div class="hr-svc-sub">E-commerce, Gifting, CSR, Events</div>
+          </div>
+          <div class="hr-svc-count">10+</div>
+        </div>
+      </div>
+    </div>
+    <div class="hr-stats">
+      <div class="hr-stat"><div class="hr-stat-val">30<em>+</em></div><div class="hr-stat-lbl">Clients Served</div></div>
+      <div class="hr-stat"><div class="hr-stat-val">4<em>+</em></div><div class="hr-stat-lbl">Years Active</div></div>
+      <div class="hr-stat"><div class="hr-stat-val">100<em>+</em></div><div class="hr-stat-lbl">Expert Yrs</div></div>
+      <div class="hr-stat"><div class="hr-stat-val">45<em>+</em></div><div class="hr-stat-lbl">Projects Done</div></div>
+    </div>
   </div>
 </section>
 

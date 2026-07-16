@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" type="image/png" href="assets/favicon.png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Perfeito Group — Innovate. Build. Deliver.</title>
@@ -10,8 +11,8 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --white:#FFFFFF;--off:#F8FAFF;--dark:#06091A;--blue:#1B4FD8;--blue-lt:#3B7BF5;
-  --blue-glow:rgba(27,79,216,0.11);--indigo:#4F46E5;--text:#0F172A;--mid:#475569;
+  --white:#FFFFFF;--off:#F8FAFF;--dark:#06091A;--blue:#0B6B6E;--blue-lt:#3D9899;
+  --blue-glow:rgba(11,107,110,0.12);--indigo:#B00D13;--text:#0F172A;--mid:#475569;
   --muted:#94A3B8;--border:#E2E8F0;--border-lt:#F1F5F9;--green:#10B981;
   --syne:'Playfair Display',serif;--inter:'DM Sans',sans-serif;
 }
@@ -100,17 +101,23 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 /* Hero right — clean structured layout */
 .hero-right{flex:0 0 42%;position:relative;z-index:2;display:flex;flex-direction:column;gap:12px}
 .hr-panel{background:linear-gradient(145deg,#0E1526,#1a2744);border-radius:22px;padding:32px;position:relative;overflow:hidden}
-.hr-panel::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(27,79,216,0.22) 0%,transparent 70%);pointer-events:none}
+.hr-panel::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(11,107,110,0.28) 0%,transparent 70%);pointer-events:none}
 .hr-panel-label{font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.16em;margin-bottom:20px;font-family:var(--inter)}
 .hr-svc-list{display:flex;flex-direction:column;gap:0}
 .hr-svc{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
 .hr-svc:last-child{border-bottom:none;padding-bottom:0}
 .hr-svc:first-child{padding-top:0}
-.hr-svc-icon{width:40px;height:40px;border-radius:10px;background:rgba(27,79,216,0.2);border:1px solid rgba(27,79,216,0.3);display:grid;place-items:center;flex-shrink:0}
-.hr-svc-icon svg{width:18px;height:18px;stroke:#60A5FA;stroke-width:1.75;fill:none}
+.hr-svc-icon{width:40px;height:40px;border-radius:10px;background:rgba(11,107,110,0.25);border:1px solid rgba(77,209,197,0.35);display:grid;place-items:center;flex-shrink:0}
+.hr-svc-icon svg{width:18px;height:18px;stroke:#4FD1C5;stroke-width:1.75;fill:none}
 .hr-svc-name{font-family:var(--syne);font-size:14px;font-weight:700;color:#fff;line-height:1.2}
 .hr-svc-sub{font-size:11.5px;color:rgba(255,255,255,0.38);margin-top:2px;font-family:var(--inter)}
-.hr-svc-count{margin-left:auto;font-family:var(--syne);font-size:18px;font-weight:800;color:#60A5FA;flex-shrink:0}
+.hr-svc-count{margin-left:auto;font-family:var(--syne);font-size:18px;font-weight:800;color:#4FD1C5;flex-shrink:0}
+.hr-carousel-track{position:relative;height:76px}
+.hr-svc.slide{position:absolute;inset:0;border-bottom:none;padding:0;opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
+.hr-svc.slide.active{opacity:1;transform:translateY(0);pointer-events:auto}
+.hr-dots{display:flex;gap:6px;margin-top:20px;justify-content:center}
+.hr-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.18);border:none;padding:0;cursor:pointer;transition:all .25s ease}
+.hr-dot.active{background:#4FD1C5;width:18px;border-radius:3px}
 .hr-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .hr-stat{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:18px 14px;text-align:center}
 .hr-stat-val{font-family:var(--syne);font-size:22px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1}
@@ -363,7 +370,7 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 
 /* ── FOOTER ─────────────────────── */
 footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,255,255,0.04)}
-.foot-top{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px}
+.foot-top{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px}
 .foot-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .f-logo-icon{width:30px;height:30px;background:var(--blue);border-radius:7px;display:grid;place-items:center}
 .f-logo-name{font-family:var(--syne);font-size:14px;font-weight:800;color:#fff}
@@ -427,6 +434,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
   .ach-big .ach-n1,.ach-big .ach-n2{font-size:clamp(80px,22vw,120px)}
   .team-grid{grid-template-columns:1fr 1fr}
 }
+.nav-logo-img{height:34px;width:auto;display:block}
 </style>
 </head>
 <body>
@@ -434,26 +442,20 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="logo-icon"><svg viewBox="0 0 22 22" fill="none"><path d="M11 2L3 18h16L11 2z" fill="white" opacity="0.92"/><path d="M11 9L7.5 18h7L11 9z" fill="white" opacity="0.4"/></svg></div>
-    <div class="logo-name">PERFEITO<span>GROUP</span></div>
-  </a>
-
+  <a href="index.html" class="nav-logo"><img src="assets/logo-horizontal.png" alt="Perfeito Group" class="nav-logo-img"></a>
   <div class="nav-menu" id="navMenu">
-    <!-- IT Solutions -->
     <div class="nav-item has-mega">
-      <button class="nav-link">IT Solutions <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <button class="nav-link">Ecommerce <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
       <div class="mega-panel">
-        <div class="mega-head">IT Solutions</div>
+        <div class="mega-head">Ecommerce Services</div>
         <div class="mega-grid">
-          <a href="retail-hospitality.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div><div><div class="mi-title">Retail &amp; Hospitality</div><p class="mi-body">Smart automation for seamless customer service and operational efficiency.</p></div></a>
-          <a href="banking-finance-solutions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16,7 12,3 8,7"/><line x1="12" y1="12" x2="12" y2="17"/></svg></div><div><div class="mi-title">BFSI</div><p class="mi-body">AI-led tech for efficiency, compliance, cyber-security and CX.</p></div></a>
-          <a href="manufacturing-industry.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="mi-title">Manufacturing Industry</div><p class="mi-body">IT solutions to drive innovation, reduce costs and improve quality.</p></div></a>
-          <a href="enterprise-it-solutions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div><div><div class="mi-title">Enterprise Solutions</div><p class="mi-body">Manage operations, protect data and enhance decision-making at scale.</p></div></a>
+          <a href="d2c-website-development.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="mi-title">D2C Website Development</div><p class="mi-body">Shopify, Magento &amp; custom D2C storefronts built as a complete e-commerce ecosystem.</p></div></a>
+          <a href="marketplace-global-expansion.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div><div><div class="mi-title">Marketplace &amp; Global Expansion</div><p class="mi-body">Domestic quick-commerce to a 40-country marketplace rollout &mdash; account, compliance, logistics.</p></div></a>
+          <a href="consulting-brand-strategy.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="mi-title">Consulting &amp; Brand Strategy</div><p class="mi-body">Diagnose, build, launch, scale &mdash; we execute your brand's growth roadmap end to end.</p></div></a>
+          <a href="content-performance-marketing.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div><div class="mi-title">Content &amp; Performance Marketing</div><p class="mi-body">Catalog, creative and paid media across marketplaces &mdash; media, SEO, influencer commerce.</p></div></a>
         </div>
       </div>
     </div>
-    <!-- Infrastructure -->
     <div class="nav-item has-mega">
       <button class="nav-link">Infrastructure <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
       <div class="mega-panel">
@@ -466,20 +468,17 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
         </div>
       </div>
     </div>
-    <!-- Consulting -->
     <div class="nav-item has-mega">
-      <button class="nav-link">Consulting <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <button class="nav-link">Corporate Services <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
       <div class="mega-panel">
-        <div class="mega-head">Consulting Services</div>
+        <div class="mega-head">Corporate Services</div>
         <div class="mega-grid">
-          <a href="ecommerce-services.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="mi-title">Ecommerce Services</div><p class="mi-body">Launch &amp; scale brands with e-commerce strategy, growth and performance marketing.</p></div></a>
           <a href="gifting.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div><div><div class="mi-title">Gifting</div><p class="mi-body">Personalized, luxury and eco-friendly gifting solutions for corporate &amp; trade.</p></div></a>
           <a href="csr-project.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="mi-title">CSR Projects</div><p class="mi-body">Planning, execution and monitoring of corporate social responsibility initiatives.</p></div></a>
           <a href="events-promotions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="mi-title">Events &amp; Promotions</div><p class="mi-body">Impactful brand experiences, event management and promotional campaigns.</p></div></a>
         </div>
       </div>
     </div>
-    <!-- Company -->
     <div class="nav-item has-mega">
       <button class="nav-link">Company <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
       <div class="mega-panel">
@@ -488,32 +487,29 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
           <a href="about.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div><div class="mi-title">About Us</div><p class="mi-body">Our vision, mission, values and the team behind Perfeito Group.</p></div></a>
           <a href="contact.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="mi-title">Contact Us</div><p class="mi-body">Reach out with questions, proposals or to schedule a consultation.</p></div></a>
           <a href="our-clients.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="mi-title">Our Clients</div><p class="mi-body">Trusted by enterprises, SMEs and PSUs across banking, retail and more.</p></div></a>
-          <a href="contact.html#locations" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="mi-title">Locations</div><p class="mi-body">New Delhi (Okhla) and Greater Noida West — visit us by appointment.</p></div></a>
+          <a href="contact.html#locations" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="mi-title">Locations</div><p class="mi-body">New Delhi (Okhla) and Greater Noida West &mdash; visit us by appointment.</p></div></a>
         </div>
       </div>
     </div>
   </div>
-
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   <a href="contact.html" class="nav-cta">Get in Touch &rarr;</a>
 </nav>
 
-<!-- Mobile Nav -->
 <div class="mob-nav" id="mobNav">
-  <div class="mob-section"><div class="mob-section-head">IT Solutions</div>
-    <a href="retail-hospitality.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Retail &amp; Hospitality</span></a>
-    <a href="banking-finance-solutions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">BFSI</span></a>
-    <a href="manufacturing-industry.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Manufacturing Industry</span></a>
-    <a href="enterprise-it-solutions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Enterprise Solutions</span></a>
+  <div class="mob-section"><div class="mob-section-head">Ecommerce</div>
+    <a href="d2c-website-development.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><span class="mob-lt">D2C Website Development</span></a>
+    <a href="marketplace-global-expansion.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/></svg></div><span class="mob-lt">Marketplace &amp; Global Expansion</span></a>
+    <a href="consulting-brand-strategy.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="mob-lt">Consulting &amp; Brand Strategy</span></a>
+    <a href="content-performance-marketing.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="13" r="4"/></svg></div><span class="mob-lt">Content &amp; Performance Marketing</span></a>
   </div>
   <div class="mob-section"><div class="mob-section-head">Infrastructure</div>
-    <a href="design-build.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Design &amp; Build</span></a>
+    <a href="design-build.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M3 3h18v18H3z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Design &amp; Build</span></a>
     <a href="interior-exterior.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Interior &amp; Exterior</span></a>
     <a href="surveillance-and-security.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Surveillance &amp; Security</span></a>
     <a href="civil-infra.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M2 20h20M6 20V9l6-6 6 6v11" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Civil Infra</span></a>
   </div>
-  <div class="mob-section"><div class="mob-section-head">Consulting</div>
-    <a href="ecommerce-services.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Ecommerce Services</span></a>
+  <div class="mob-section"><div class="mob-section-head">Corporate Services</div>
     <a href="gifting.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 12 20 22 4 22 4 12" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Gifting</span></a>
     <a href="csr-project.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">CSR Projects</span></a>
     <a href="events-promotions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Events &amp; Promotions</span></a>
@@ -534,7 +530,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
   <div class="hero-left reveal">
     <div class="hero-badge"><div class="badge-dot"></div><span class="badge-text">Trusted by <em>30+</em> enterprise clients across India</span></div>
     <h1>We&nbsp;<span class="cycle-wrap"><span class="cycle-word active">Innovate</span><span class="cycle-word">Build</span><span class="cycle-word">Deliver</span><span class="cycle-word">Transform</span></span><br>for Modern<br>Business.</h1>
-    <p class="hero-sub">Perfeito Group brings together end-to-end IT solutions, infrastructure design, and strategic consulting — so your business moves faster and grows further.</p>
+    <p class="hero-sub">Perfeito Group brings together end-to-end e-commerce execution, infrastructure design, and brand growth strategy — so your business moves faster and scales further.</p>
     <div class="hero-btns">
       <a href="contact.html" class="btn-p">Book a Consultation &rarr;</a>
       <a href="services.html" class="btn-g">Explore Services</a>
@@ -548,40 +544,41 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
     </div>
   </div>
   <div class="hero-right reveal">
-    <div class="hr-panel">
+    <div class="hr-panel" id="hrPanel">
       <div class="hr-panel-label">Our Service Pillars</div>
-      <div class="hr-svc-list">
-        <div class="hr-svc">
-          <div class="hr-svc-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8,21 12,17 16,21"/></svg>
-          </div>
-          <div>
-            <div class="hr-svc-name">IT Solutions</div>
-            <div class="hr-svc-sub">Retail, BFSI, Manufacturing, Enterprise</div>
-          </div>
-          <div class="hr-svc-count">15+</div>
+      <div class="hr-carousel-track" id="hrCarouselTrack">
+        <div class="hr-svc slide active">
+          <div class="hr-svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div><div class="hr-svc-name">D2C Website Development</div><div class="hr-svc-sub">Shopify, Magento &amp; custom builds</div></div>
+          <div class="hr-svc-count">50+</div>
         </div>
-        <div class="hr-svc">
-          <div class="hr-svc-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-          </div>
-          <div>
-            <div class="hr-svc-name">Infrastructure</div>
-            <div class="hr-svc-sub">Design, Build, Surveillance, Civil</div>
-          </div>
+        <div class="hr-svc slide">
+          <div class="hr-svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+          <div><div class="hr-svc-name">Marketplace &amp; Global Expansion</div><div class="hr-svc-sub">US &middot; EU &middot; MENA &middot; Australia</div></div>
+          <div class="hr-svc-count">40+</div>
+        </div>
+        <div class="hr-svc slide">
+          <div class="hr-svc-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div><div class="hr-svc-name">Consulting &amp; Brand Strategy</div><div class="hr-svc-sub">Diagnose &middot; Build &middot; Launch &middot; Scale</div></div>
+          <div class="hr-svc-count">4-Step</div>
+        </div>
+        <div class="hr-svc slide">
+          <div class="hr-svc-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          <div><div class="hr-svc-name">Content &amp; Performance Marketing</div><div class="hr-svc-sub">Catalog, media, SEO &amp; ads</div></div>
+          <div class="hr-svc-count">20+ Yrs</div>
+        </div>
+        <div class="hr-svc slide">
+          <div class="hr-svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+          <div><div class="hr-svc-name">Infrastructure</div><div class="hr-svc-sub">Design, Build, Surveillance, Civil</div></div>
           <div class="hr-svc-count">20+</div>
         </div>
-        <div class="hr-svc">
-          <div class="hr-svc-icon">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div>
-            <div class="hr-svc-name">Consulting</div>
-            <div class="hr-svc-sub">E-commerce, Gifting, CSR, Events</div>
-          </div>
+        <div class="hr-svc slide">
+          <div class="hr-svc-icon"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div>
+          <div><div class="hr-svc-name">Corporate Services</div><div class="hr-svc-sub">Gifting, CSR &amp; Events</div></div>
           <div class="hr-svc-count">10+</div>
         </div>
       </div>
+      <div class="hr-dots" id="hrDots"></div>
     </div>
     <div class="hr-stats">
       <div class="hr-stat"><div class="hr-stat-val">30<em>+</em></div><div class="hr-stat-lbl">Clients Served</div></div>
@@ -594,7 +591,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
 
 <!-- TAPE -->
 <div class="tape" aria-hidden="true">
-  <div class="tape-inner">Innovate <span class="dot">&middot;</span> Build <span class="dot">&middot;</span> Deliver <span class="dot">&middot;</span> Transform <span class="dot">&middot;</span> IT Solutions <span class="dot">&middot;</span> BFSI <span class="dot">&middot;</span> Retail <span class="dot">&middot;</span> Manufacturing <span class="dot">&middot;</span> Infrastructure <span class="dot">&middot;</span> Consulting <span class="dot">&middot;</span> New Delhi <span class="dot">&middot;</span> Greater Noida <span class="dot">&middot;</span> Perfeito Group <span class="dot">&middot;</span>&nbsp;&nbsp;Innovate <span class="dot">&middot;</span> Build <span class="dot">&middot;</span> Deliver <span class="dot">&middot;</span> Transform <span class="dot">&middot;</span> IT Solutions <span class="dot">&middot;</span> BFSI <span class="dot">&middot;</span> Retail <span class="dot">&middot;</span> Manufacturing <span class="dot">&middot;</span> Infrastructure <span class="dot">&middot;</span> Consulting <span class="dot">&middot;</span> New Delhi <span class="dot">&middot;</span> Greater Noida <span class="dot">&middot;</span> Perfeito Group <span class="dot">&middot;</span></div>
+  <div class="tape-inner">Innovate <span class="dot">&middot;</span> Build <span class="dot">&middot;</span> Deliver <span class="dot">&middot;</span> Transform <span class="dot">&middot;</span> Ecommerce <span class="dot">&middot;</span> D2C <span class="dot">&middot;</span> Marketplaces <span class="dot">&middot;</span> Brand Strategy <span class="dot">&middot;</span> Infrastructure <span class="dot">&middot;</span> Corporate Services <span class="dot">&middot;</span> New Delhi <span class="dot">&middot;</span> Greater Noida <span class="dot">&middot;</span> Perfeito Group <span class="dot">&middot;</span>&nbsp;&nbsp;Innovate <span class="dot">&middot;</span> Build <span class="dot">&middot;</span> Deliver <span class="dot">&middot;</span> Transform <span class="dot">&middot;</span> Ecommerce <span class="dot">&middot;</span> D2C <span class="dot">&middot;</span> Marketplaces <span class="dot">&middot;</span> Brand Strategy <span class="dot">&middot;</span> Infrastructure <span class="dot">&middot;</span> Corporate Services <span class="dot">&middot;</span> New Delhi <span class="dot">&middot;</span> Greater Noida <span class="dot">&middot;</span> Perfeito Group <span class="dot">&middot;</span></div>
 </div>
 
 <!-- LOGO / CLIENT STRIP -->
@@ -631,40 +628,40 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
   <div class="wrap">
     <div class="sec-hdr reveal">
       <span class="eyebrow">Our Solutions</span>
-      <h2 class="s-title">End-to-End Solutions for<br>Every Business Need.</h2>
-      <p class="s-sub">From technology deployments to infrastructure design and strategic consulting — one partner, every growth channel.</p>
+      <h2 class="s-title">End-to-End Solutions for<br>Every Growth Channel.</h2>
+      <p class="s-sub">From e-commerce execution to infrastructure design and corporate services — one partner, every growth channel.</p>
     </div>
     <div class="srv-grid-6">
-      <a href="retail-hospitality.html" class="srv-card reveal">
-        <div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
-        <div class="srv-cat">IT Solutions</div>
-        <div class="srv-title">Retail &amp; Hospitality</div>
-        <p class="srv-body">POS systems, self-checkouts, KDS, digital signage, RFID, hotel management and omni-channel retail solutions.</p>
-        <div class="srv-tags"><span class="srv-tag">POS &amp; Peripherals</span><span class="srv-tag">Self Checkout</span><span class="srv-tag">Hotel Mgmt</span></div>
-        <div class="srv-arrow">Learn More &rarr;</div>
-      </a>
-      <a href="banking-finance-solutions.html" class="srv-card reveal">
-        <div class="srv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16,7 12,3 8,7"/><line x1="12" y1="12" x2="12" y2="17"/></svg></div>
-        <div class="srv-cat">IT Solutions</div>
-        <div class="srv-title">BFSI Technology</div>
-        <p class="srv-body">Kiosk teller systems, core banking, digital signage, data center management, cyber security and QR payment solutions.</p>
-        <div class="srv-tags"><span class="srv-tag">Core Banking</span><span class="srv-tag">Cyber Security</span><span class="srv-tag">LOS / LMS</span></div>
-        <div class="srv-arrow">Learn More &rarr;</div>
-      </a>
-      <a href="manufacturing-industry.html" class="srv-card reveal">
+      <a href="d2c-website-development.html" class="srv-card reveal">
         <div class="srv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <div class="srv-cat">IT Solutions</div>
-        <div class="srv-title">Manufacturing Industry</div>
-        <p class="srv-body">Data centre infrastructure, networking, end-user computing, enterprise servers, video conferencing and FMS.</p>
-        <div class="srv-tags"><span class="srv-tag">Data Centre</span><span class="srv-tag">Enterprise Servers</span><span class="srv-tag">FMS</span></div>
+        <div class="srv-cat">Ecommerce</div>
+        <div class="srv-title">D2C Website Development</div>
+        <p class="srv-body">End-to-end D2C ecosystems on Shopify, Magento or custom platforms — built as a vertical for your brand, not just a website.</p>
+        <div class="srv-tags"><span class="srv-tag">Shopify</span><span class="srv-tag">Magento</span><span class="srv-tag">Custom Builds</span></div>
         <div class="srv-arrow">Learn More &rarr;</div>
       </a>
-      <a href="enterprise-it-solutions.html" class="srv-card reveal">
+      <a href="marketplace-global-expansion.html" class="srv-card reveal">
         <div class="srv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
-        <div class="srv-cat">IT Solutions</div>
-        <div class="srv-title">Enterprise Solutions</div>
-        <p class="srv-body">Cloud management, ITMS, network management, digital signage, campaign management and access monitoring at scale.</p>
-        <div class="srv-tags"><span class="srv-tag">Cloud Mgmt</span><span class="srv-tag">ITMS</span><span class="srv-tag">Access Control</span></div>
+        <div class="srv-cat">Ecommerce</div>
+        <div class="srv-title">Marketplace &amp; Global Expansion</div>
+        <p class="srv-body">Domestic marketplace and quick-commerce management, plus global rollout across the US, Europe, MENA and Australia.</p>
+        <div class="srv-tags"><span class="srv-tag">40+ Countries</span><span class="srv-tag">Compliance</span><span class="srv-tag">Logistics</span></div>
+        <div class="srv-arrow">Learn More &rarr;</div>
+      </a>
+      <a href="consulting-brand-strategy.html" class="srv-card reveal">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="srv-cat">Ecommerce</div>
+        <div class="srv-title">Consulting &amp; Brand Strategy</div>
+        <p class="srv-body">We don't advise, we execute — a diagnose, build, launch, scale framework with C-level and category leadership access.</p>
+        <div class="srv-tags"><span class="srv-tag">Diagnostics</span><span class="srv-tag">Brand Strategy</span><span class="srv-tag">Execution</span></div>
+        <div class="srv-arrow">Learn More &rarr;</div>
+      </a>
+      <a href="content-performance-marketing.html" class="srv-card reveal">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="srv-cat">Ecommerce</div>
+        <div class="srv-title">Content &amp; Performance Marketing</div>
+        <p class="srv-body">Catalog and content creation, paid media, influencer commerce and SEO — the retention and growth engine behind every launch.</p>
+        <div class="srv-tags"><span class="srv-tag">Catalog &amp; Content</span><span class="srv-tag">Performance Media</span><span class="srv-tag">SEO</span></div>
         <div class="srv-arrow">Learn More &rarr;</div>
       </a>
       <a href="services.html#infra" class="srv-card reveal">
@@ -675,12 +672,12 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
         <div class="srv-tags"><span class="srv-tag">Design &amp; Build</span><span class="srv-tag">CCTV</span><span class="srv-tag">Civil Works</span></div>
         <div class="srv-arrow">Learn More &rarr;</div>
       </a>
-      <a href="services.html#consulting" class="srv-card reveal">
-        <div class="srv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="srv-cat">Consulting</div>
-        <div class="srv-title">Consulting Services</div>
-        <p class="srv-body">E-commerce growth strategy, corporate gifting, CSR project management, and events &amp; promotional campaigns.</p>
-        <div class="srv-tags"><span class="srv-tag">E-commerce</span><span class="srv-tag">Gifting</span><span class="srv-tag">Events</span></div>
+      <a href="services.html#corporate" class="srv-card reveal">
+        <div class="srv-icon"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div>
+        <div class="srv-cat">Corporate Services</div>
+        <div class="srv-title">Corporate Services</div>
+        <p class="srv-body">Personalized corporate gifting, CSR project planning and execution, and events &amp; promotional campaigns.</p>
+        <div class="srv-tags"><span class="srv-tag">Gifting</span><span class="srv-tag">CSR</span><span class="srv-tag">Events</span></div>
         <div class="srv-arrow">Learn More &rarr;</div>
       </a>
     </div>
@@ -700,7 +697,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       <div class="proj-card wide reveal">
         <div class="proj-thumb pt-blue">
           <div class="proj-dots"></div>
-          <a href="banking-finance-solutions.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
+          <a href="contact.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
           <div class="proj-meta">
             <span class="proj-tag">BFSI · Digital Transformation</span>
             <div class="proj-name">Branch Digital Overhaul<br>— Leading PSU Bank</div>
@@ -712,7 +709,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       <div class="proj-card reveal">
         <div class="proj-thumb pt-green">
           <div class="proj-dots"></div>
-          <a href="retail-hospitality.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
+          <a href="contact.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
           <div class="proj-meta">
             <span class="proj-tag">Retail · POS Rollout</span>
             <div class="proj-name">25-Store POS &amp; EAS Deployment</div>
@@ -724,9 +721,9 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       <div class="proj-card reveal">
         <div class="proj-thumb pt-dark">
           <div class="proj-dots"></div>
-          <a href="manufacturing-industry.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
+          <a href="contact.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
           <div class="proj-meta">
-            <span class="proj-tag">Manufacturing · IT Infra</span>
+            <span class="proj-tag">Manufacturing · Infrastructure</span>
             <div class="proj-name">3-Plant Digital Infrastructure Build</div>
             <div class="proj-stat">Data centre, networking, EUC, FMS</div>
           </div>
@@ -748,7 +745,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       <div class="proj-card wide reveal">
         <div class="proj-thumb pt-purple">
           <div class="proj-dots"></div>
-          <a href="enterprise-it-solutions.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
+          <a href="contact.html" class="proj-arrow-btn"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg></a>
           <div class="proj-meta">
             <span class="proj-tag">Enterprise · Cloud &amp; IT Managed Services</span>
             <div class="proj-name">Hybrid Cloud Migration &amp; ITMS<br>— 5,000-seat Corporate</div>
@@ -844,7 +841,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
     <div class="sec-hdr reveal">
       <span class="eyebrow">Our Journey</span>
       <h2 class="s-title">How We Grew Into<br>a Trusted Partner.</h2>
-      <p class="s-sub">From a focused IT solutions startup to a full-service enterprise partner — every milestone shaped who we are.</p>
+      <p class="s-sub">From a focused enterprise execution partner to a full-service e-commerce, infrastructure and brand growth partner — every milestone shaped who we are.</p>
     </div>
     <div class="journey-grid">
       <div class="jstep reveal">
@@ -852,14 +849,14 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
         <div class="js-num">01 <span>Foundation</span></div>
         <div class="js-year">2019</div>
         <div class="js-title">Perfeito Group Founded</div>
-        <p class="js-body">Incorporated in New Delhi with a clear mandate: deliver enterprise-grade IT solutions to India's banking and retail sectors. First three clients onboarded within 90 days.</p>
+        <p class="js-body">Incorporated in New Delhi with a clear mandate: deliver enterprise-grade execution to India's banking and retail sectors. First three clients onboarded within 90 days.</p>
       </div>
       <div class="jstep reveal">
         <div class="js-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
         <div class="js-num">02 <span>Expansion</span></div>
         <div class="js-year">2021</div>
-        <div class="js-title">Infrastructure & Consulting Added</div>
-        <p class="js-body">Expanded beyond IT into physical infrastructure design, interior fit-outs and strategic consulting — becoming a true end-to-end partner for enterprise clients.</p>
+        <div class="js-title">Infrastructure &amp; Ecommerce Added</div>
+        <p class="js-body">Expanded into physical infrastructure design, interior fit-outs and e-commerce execution — becoming a true end-to-end partner for enterprise clients and growing brands.</p>
       </div>
       <div class="jstep reveal">
         <div class="js-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
@@ -971,7 +968,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
             <div><div class="ccm-val">40%</div><div class="ccm-lbl">Ops Cost Reduction</div></div>
           </div>
         </div>
-        <div class="cc-foot"><span class="cc-service">IT Solutions + Infrastructure</span><a href="contact.html" class="cc-link">Discuss a Project &rarr;</a></div>
+        <div class="cc-foot"><span class="cc-service">Infrastructure Delivery</span><a href="contact.html" class="cc-link">Discuss a Project &rarr;</a></div>
       </div>
       <div class="case-card">
         <div class="cc-top c2"></div>
@@ -985,7 +982,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
             <div><div class="ccm-val">28%</div><div class="ccm-lbl">Shrinkage Reduced</div></div>
           </div>
         </div>
-        <div class="cc-foot"><span class="cc-service">Retail IT Solutions</span><a href="contact.html" class="cc-link">Discuss a Project &rarr;</a></div>
+        <div class="cc-foot"><span class="cc-service">Retail Infrastructure</span><a href="contact.html" class="cc-link">Discuss a Project &rarr;</a></div>
       </div>
       <div class="case-card">
         <div class="cc-top c3"></div>
@@ -999,7 +996,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
             <div><div class="ccm-val">35%</div><div class="ccm-lbl">Efficiency Gain</div></div>
           </div>
         </div>
-        <div class="cc-foot"><span class="cc-service">Manufacturing IT + Infrastructure</span><a href="contact.html" class="cc-link">Discuss a Project &rarr;</a></div>
+        <div class="cc-foot"><span class="cc-service">Manufacturing Infrastructure</span><a href="contact.html" class="cc-link">Discuss a Project &rarr;</a></div>
       </div>
     </div>
     <div style="text-align:center;margin-top:40px"><a href="our-clients.html" class="btn-p">View All Case Studies &rarr;</a></div>
@@ -1024,8 +1021,8 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       <div class="team-card reveal">
         <div class="team-avatar ta-2">RS</div>
         <div class="team-name">Rajesh Sharma</div>
-        <div class="team-role">Head — IT Solutions</div>
-        <span class="team-dept">IT Solutions</span>
+        <div class="team-role">Head — Ecommerce</div>
+        <span class="team-dept">Ecommerce</span>
       </div>
       <div class="team-card reveal">
         <div class="team-avatar ta-3">PM</div>
@@ -1036,8 +1033,8 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       <div class="team-card reveal">
         <div class="team-avatar ta-4">AK</div>
         <div class="team-name">Amit Kapoor</div>
-        <div class="team-role">Head — Consulting</div>
-        <span class="team-dept">Consulting</span>
+        <div class="team-role">Head — Corporate Services</div>
+        <span class="team-dept">Corporate Services</span>
       </div>
     </div>
     <div style="text-align:center;margin-top:36px"><a href="about.html" class="btn-g">Meet the Full Team &rarr;</a></div>
@@ -1092,7 +1089,7 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
   <div class="foot-top">
     <div>
       <div class="foot-logo"><div class="f-logo-icon"><svg viewBox="0 0 22 22" fill="none"><path d="M11 2L3 18h16L11 2z" fill="white" opacity="0.9"/><path d="M11 9L7.5 18h7L11 9z" fill="white" opacity="0.4"/></svg></div><span class="f-logo-name">PERFEITO GROUP</span></div>
-      <p class="foot-desc">Your end-to-end partner in IT solutions, infrastructure design, and strategic consulting. Trusted by enterprises, SMEs and PSUs since 2019.</p>
+      <p class="foot-desc">Your end-to-end partner in e-commerce execution, infrastructure design, and brand growth strategy. Trusted by enterprises, SMEs and PSUs since 2019.</p>
       <div class="foot-contact-items">
         <span class="fci"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.63a19.79 19.79 0 01-3.07-8.7A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>+91-9910-324923</span>
         <span class="fci"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>virendra@perfeitogroup.com</span>
@@ -1100,21 +1097,28 @@ footer{background:#020610;padding:68px 48px 26px;border-top:1px solid rgba(255,2
       </div>
     </div>
     <div>
-      <div class="foot-col-head">IT Solutions</div>
+      <div class="foot-col-head">Ecommerce</div>
       <ul class="foot-links">
-        <li><a href="retail-hospitality.html">Retail &amp; Hospitality</a></li>
-        <li><a href="banking-finance-solutions.html">BFSI Technology</a></li>
-        <li><a href="manufacturing-industry.html">Manufacturing Industry</a></li>
-        <li><a href="enterprise-it-solutions.html">Enterprise Solutions</a></li>
+        <li><a href="d2c-website-development.html">D2C Website Development</a></li>
+        <li><a href="marketplace-global-expansion.html">Marketplace &amp; Global Expansion</a></li>
+        <li><a href="consulting-brand-strategy.html">Consulting &amp; Brand Strategy</a></li>
+        <li><a href="content-performance-marketing.html">Content &amp; Performance Marketing</a></li>
       </ul>
     </div>
     <div>
-      <div class="foot-col-head">Services</div>
+      <div class="foot-col-head">Infrastructure</div>
       <ul class="foot-links">
         <li><a href="design-build.html">Design &amp; Build</a></li>
         <li><a href="surveillance-and-security.html">Surveillance &amp; Security</a></li>
-        <li><a href="ecommerce-services.html">Ecommerce Services</a></li>
+        <li><a href="civil-infra.html">Civil Infra</a></li>
+        <li><a href="interior-exterior.html">Interior &amp; Exterior</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-head">Corporate Services</div>
+      <ul class="foot-links">
         <li><a href="gifting.html">Corporate Gifting</a></li>
+        <li><a href="csr-project.html">CSR Projects</a></li>
         <li><a href="events-promotions.html">Events &amp; Promotions</a></li>
       </ul>
     </div>
@@ -1143,6 +1147,20 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>40
 // Word cycle
 const words=document.querySelectorAll('.cycle-word');let cw=0;
 setInterval(()=>{words[cw].classList.remove('active');cw=(cw+1)%words.length;words[cw].classList.add('active')},2200);
+// Hero service pillar carousel
+const hrSlides=document.querySelectorAll('#hrCarouselTrack .slide'),hrDots=document.getElementById('hrDots'),hrPanel=document.getElementById('hrPanel');
+if(hrSlides.length){
+  hrSlides.forEach((_,i)=>{const d=document.createElement('button');d.className='hr-dot'+(i===0?' active':'');d.setAttribute('aria-label','Show service '+(i+1));d.addEventListener('click',()=>goToSlide(i));hrDots.appendChild(d)});
+  const hrDotEls=hrDots.querySelectorAll('.hr-dot');
+  let hi=0,hrTimer;
+  function goToSlide(i){hrSlides[hi].classList.remove('active');hrDotEls[hi].classList.remove('active');hi=i;hrSlides[hi].classList.add('active');hrDotEls[hi].classList.add('active')}
+  function nextSlide(){goToSlide((hi+1)%hrSlides.length)}
+  function startHr(){hrTimer=setInterval(nextSlide,3200)}
+  function stopHr(){clearInterval(hrTimer)}
+  startHr();
+  hrPanel.addEventListener('mouseenter',stopHr);
+  hrPanel.addEventListener('mouseleave',startHr);
+}
 // Reveal
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%5)*80+'ms';obs.observe(el);const r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)setTimeout(()=>el.classList.add('in'),i*55)});

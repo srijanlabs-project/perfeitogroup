@@ -1,0 +1,417 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Perfeito Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--white:#FFFFFF;--off:#F8FAFF;--dark:#06091A;--navy:#0E1526;--blue:#1B4FD8;--blue-lt:#3B7BF5;--blue-glow:rgba(27,79,216,0.12);--indigo:#4F46E5;--text:#0F172A;--mid:#475569;--muted:#94A3B8;--border:#E2E8F0;--border-lt:#F1F5F9;--green:#10B981;--syne:'Playfair Display',serif;--inter:'DM Sans',sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--inter);color:var(--text);background:var(--white);overflow-x:hidden}
+
+
+.scroll-bar{position:fixed;top:0;left:0;height:2.5px;background:linear-gradient(90deg,var(--blue),var(--indigo));z-index:600;width:0%;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;height:68px;padding:0 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-icon{width:38px;height:38px;border-radius:10px;background:var(--blue);display:grid;place-items:center;box-shadow:0 4px 12px rgba(27,79,216,0.3);flex-shrink:0}
+.logo-icon svg{width:22px;height:22px}
+.logo-name{font-family:var(--syne);font-size:17px;font-weight:800;color:var(--text);letter-spacing:-0.02em;line-height:1}
+.logo-name span{display:block;font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--mid);text-decoration:none;padding:7px 14px;border-radius:8px;transition:all .18s}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--border-lt)}
+.nav-links a.active{color:var(--blue);font-weight:600}
+.nav-cta{background:var(--blue);color:#fff;padding:10px 22px;border-radius:9px;font-size:13.5px;font-weight:600;text-decoration:none;transition:all .22s;box-shadow:0 4px 14px rgba(27,79,216,0.3)}
+.nav-cta:hover{background:var(--blue-lt);transform:translateY(-1px)}
+
+/* PAGE HEADER */
+.page-header{background:var(--dark);padding:130px 56px 80px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(27,79,216,0.2) 0%,transparent 70%);pointer-events:none}
+.ph-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;opacity:.6}
+.ph-inner{max-width:1120px;margin:0 auto;position:relative;z-index:1}
+.ph-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:#60A5FA;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;font-family:var(--inter)}
+.ph-eyebrow::before{content:'';width:18px;height:2px;background:#60A5FA;border-radius:2px}
+.ph-title{font-family:var(--syne);font-size:clamp(40px,5vw,68px);font-weight:800;line-height:1.06;letter-spacing:-0.04em;color:#fff;margin-bottom:20px}
+.ph-title em{font-style:normal;color:#93C5FD}
+.ph-sub{font-size:17px;color:rgba(255,255,255,0.48);line-height:1.7;max-width:540px;font-weight:300}
+
+/* SHARED */
+.sec{padding:96px 56px}
+.wrap{max-width:1120px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;font-family:var(--inter)}
+.eyebrow::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px}
+.s-title{font-family:var(--syne);font-size:clamp(28px,3vw,42px);font-weight:800;line-height:1.14;letter-spacing:-0.03em;color:var(--text)}
+.s-sub{font-size:16px;line-height:1.7;color:var(--mid);margin-top:14px;max-width:520px}
+.btn-p{background:var(--blue);color:#fff;padding:13px 26px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .22s;box-shadow:0 6px 20px rgba(27,79,216,0.3);font-family:var(--inter)}
+.btn-p:hover{background:var(--blue-lt);transform:translateY(-2px)}
+.btn-g{background:var(--white);color:var(--text);padding:13px 26px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;border:1.5px solid var(--border);display:inline-flex;align-items:center;gap:8px;transition:all .22s;font-family:var(--inter)}
+.btn-g:hover{border-color:var(--blue);color:var(--blue)}
+
+/* SERVICE BLOCKS */
+.srv-block{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.srv-block.flip{direction:rtl}
+.srv-block.flip>*{direction:ltr}
+.srv-content{}
+.srv-sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+.sub-card{background:var(--off);border:1.5px solid var(--border);border-radius:14px;padding:20px 18px;transition:all .22s;cursor:default}
+.sub-card:hover{background:var(--white);border-color:var(--blue);box-shadow:0 8px 24px rgba(27,79,216,0.07)}
+.sub-card:hover .sc-icon{background:var(--blue);border-color:transparent}
+.sub-card:hover .sc-icon svg{stroke:#fff}
+.sc-icon{width:36px;height:36px;border-radius:9px;background:var(--white);border:1.5px solid var(--border);display:grid;place-items:center;margin-bottom:12px;transition:all .22s}
+.sc-icon svg{width:18px;height:18px;stroke:var(--blue);stroke-width:1.75;fill:none;transition:stroke .22s}
+.sc-title{font-family:var(--syne);font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:5px}
+.sc-body{font-size:12px;color:var(--mid);line-height:1.6;font-family:var(--inter)}
+
+/* Visual panel */
+.srv-visual{position:relative}
+.sv-main{border-radius:20px;padding:40px;position:relative;overflow:hidden;min-height:380px;display:flex;flex-direction:column;justify-content:space-between}
+.sv-main.dark{background:linear-gradient(145deg,#0E1526,#1B2D4F)}
+.sv-main.mid{background:linear-gradient(145deg,#1e1b4b,#2d2b70)}
+.sv-main.teal{background:linear-gradient(145deg,#042f2e,#065f46)}
+.sv-main::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(27,79,216,0.3) 0%,transparent 70%);pointer-events:none}
+.sv-label{font-family:var(--inter);font-size:10px;font-weight:700;color:rgba(255,255,255,0.28);text-transform:uppercase;letter-spacing:.16em;margin-bottom:8px}
+.sv-heading{font-family:var(--syne);font-size:22px;font-weight:800;color:#fff;line-height:1.3;letter-spacing:-0.02em;margin-bottom:24px}
+.sv-heading span{color:#93C5FD}
+.sv-pills{display:flex;flex-wrap:wrap;gap:8px}
+.sv-pill{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);font-family:var(--inter)}
+.sv-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;z-index:1}
+.sv-stat{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:16px}
+.sv-stat-val{font-family:var(--syne);font-size:26px;font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1}
+.sv-stat-val em{font-style:normal;color:#34D399}
+.sv-stat-lbl{font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.08em;margin-top:5px;font-weight:600;font-family:var(--inter)}
+.sv-float{position:absolute;bottom:-20px;left:24px;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px 16px;box-shadow:0 16px 40px rgba(0,0,0,0.1)}
+.svf-val{font-family:var(--syne);font-size:18px;font-weight:800;color:var(--text);letter-spacing:-0.02em}
+.svf-lbl{font-size:10.5px;color:var(--muted);font-family:var(--inter);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+
+/* PROCESS */
+.process-sec{background:var(--off)}
+.proc-grid{display:grid;grid-template-columns:repeat(5,1fr);position:relative;margin-top:56px}
+.proc-grid::before{content:'';position:absolute;top:24px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);z-index:0}
+.proc-step{text-align:center;padding:0 12px;position:relative;z-index:1}
+.proc-node{width:48px;height:48px;border-radius:50%;background:var(--white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:var(--syne);font-size:12px;font-weight:800;color:var(--blue);transition:all .25s}
+.proc-step:hover .proc-node{background:var(--blue);color:#fff;border-color:var(--blue);transform:scale(1.1);box-shadow:0 0 0 6px rgba(27,79,216,0.1)}
+.proc-title{font-family:var(--syne);font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px}
+.proc-body{font-size:12.5px;color:var(--mid);line-height:1.62;font-family:var(--inter)}
+
+/* DIVIDER */
+.sec-divider{height:1px;background:var(--border);max-width:1120px;margin:0 auto}
+
+/* CTA */
+.cta-sec{background:var(--dark);padding:96px 56px;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(27,79,216,0.18) 0%,transparent 70%);pointer-events:none}
+.cta-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:60px;position:relative;z-index:1}
+.cta-eyebrow{font-size:11px;font-weight:700;color:#60A5FA;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:block;font-family:var(--inter)}
+.cta-hed{font-family:var(--syne);font-size:clamp(26px,3vw,44px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:14px}
+.cta-hed em{font-style:normal;color:#93C5FD}
+.cta-deck{font-size:15px;color:rgba(255,255,255,0.4);line-height:1.68;max-width:480px;font-family:var(--inter);font-weight:300}
+.cta-actions{display:flex;flex-direction:column;gap:10px;flex-shrink:0}
+.btn-cta{background:var(--blue);color:#fff;padding:16px 34px;border-radius:10px;font-size:14.5px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;justify-content:center;transition:all .22s;white-space:nowrap;box-shadow:0 6px 20px rgba(27,79,216,0.4);font-family:var(--inter)}
+.btn-cta:hover{background:var(--blue-lt);transform:translateY(-2px)}
+.btn-cta-ghost{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.65);padding:14px 28px;border-radius:10px;font-size:13.5px;font-weight:500;text-decoration:none;border:1px solid rgba(255,255,255,0.1);display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .22s;font-family:var(--inter)}
+.btn-cta-ghost:hover{background:rgba(255,255,255,0.12)}
+
+/* FOOTER */
+footer{background:#020610;padding:64px 56px 28px;border-top:1px solid rgba(255,255,255,0.04)}
+.foot-top{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:2.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.foot-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.f-logo-icon{width:30px;height:30px;background:var(--blue);border-radius:7px;display:grid;place-items:center}
+.f-logo-name{font-family:var(--syne);font-size:14px;font-weight:800;color:#fff}
+.foot-desc{font-size:12.5px;color:rgba(255,255,255,0.25);line-height:1.75;font-family:var(--inter);max-width:260px}
+.foot-col-head{font-family:var(--inter);font-size:10.5px;font-weight:700;color:rgba(255,255,255,0.2);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.foot-links a{font-size:13px;color:rgba(255,255,255,0.38);text-decoration:none;transition:color .18s;font-family:var(--inter)}
+.foot-links a:hover{color:rgba(255,255,255,0.85)}
+.foot-bottom{max-width:1120px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.05);padding-top:22px;display:flex;align-items:center;justify-content:space-between}
+.foot-copy{font-size:12px;color:rgba(255,255,255,0.18);font-family:var(--inter)}
+.foot-bottom-links{display:flex;gap:20px}
+.foot-bottom-links a{font-size:12px;color:rgba(255,255,255,0.18);text-decoration:none;font-family:var(--inter)}
+.foot-bottom-links a:hover{color:rgba(255,255,255,0.5)}
+
+/* WA */
+.wa{position:fixed;bottom:28px;right:28px;z-index:400;width:52px;height:52px;background:#25D366;border-radius:50%;display:grid;place-items:center;box-shadow:0 4px 20px rgba(37,211,102,0.45);text-decoration:none;transition:transform .2s}
+.wa:hover{transform:scale(1.1)}
+.wa svg{width:26px;height:26px;fill:#fff}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){nav{padding:0 32px}.page-header{padding:120px 32px 64px}.sec{padding:72px 32px}.cta-sec{padding:72px 32px}.foot-top{grid-template-columns:1fr 1fr;gap:36px}footer{padding:56px 32px 24px}}
+@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}.page-header{padding:100px 20px 56px}.sec{padding:56px 20px}.srv-block,.srv-block.flip{grid-template-columns:1fr;direction:ltr;gap:48px}.srv-sub-grid{grid-template-columns:1fr}.proc-grid{grid-template-columns:1fr 1fr;gap:28px}.proc-grid::before{display:none}.cta-sec{padding:56px 20px}.cta-inner{grid-template-columns:1fr}.foot-top{grid-template-columns:1fr;gap:28px}footer{padding:48px 20px 24px}.foot-bottom{flex-direction:column;gap:10px}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon"><svg viewBox="0 0 22 22" fill="none"><path d="M11 2L3 18h16L11 2z" fill="white" opacity="0.92"/><path d="M11 9L7.5 18h7L11 9z" fill="white" opacity="0.4"/></svg></div>
+    <div class="logo-name">PERFEITO<span>GROUP</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="services.html" class="active">Services</a>
+    <a href="about.html">About Us</a>
+    <a href="index.html#industries">Industries</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="contact.html" class="nav-cta">Get in Touch &rarr;</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="ph-dots"></div>
+  <div class="ph-inner">
+    <div class="ph-eyebrow">Our Solutions</div>
+    <h1 class="ph-title">Everything Your Business<br>Needs to <em>Grow</em>.</h1>
+    <p class="ph-sub">Three powerful verticals. Hundreds of solutions. One accountable partner who sees every project through.</p>
+  </div>
+</div>
+
+<!-- IT SOLUTIONS -->
+<section class="sec" id="it">
+  <div class="wrap">
+    <div class="srv-block reveal">
+      <div class="srv-content">
+        <span class="eyebrow">IT Solutions</span>
+        <h2 class="s-title">Technology that<br>Drives Real Business.</h2>
+        <p class="s-sub">We design, deploy and manage technology solutions across retail, hospitality, BFSI and enterprise sectors — handling everything from hardware to software integration.</p>
+        <div class="srv-sub-grid">
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+            <div class="sc-title">Retail &amp; Hospitality</div>
+            <p class="sc-body">POS systems, inventory management, customer-facing kiosks and hospitality automation suites.</p>
+          </div>
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8,21 12,17 16,21"/></svg></div>
+            <div class="sc-title">BFSI Technology</div>
+            <p class="sc-body">Secure banking software, compliance systems, digital onboarding and transaction platforms.</p>
+          </div>
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg></div>
+            <div class="sc-title">Manufacturing Tech</div>
+            <p class="sc-body">ERP integration, shop-floor automation, production tracking and quality management systems.</p>
+          </div>
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+            <div class="sc-title">Enterprise Solutions</div>
+            <p class="sc-body">End-to-end enterprise digital transformation, cloud migration and workforce management tools.</p>
+          </div>
+        </div>
+        <div style="margin-top:32px;display:flex;gap:12px"><a href="contact.html" class="btn-p">Request a Proposal &rarr;</a><a href="#infra" class="btn-g">Next: Infrastructure</a></div>
+      </div>
+      <div class="srv-visual reveal">
+        <div class="sv-main dark">
+          <div>
+            <div class="sv-label">IT Solutions Overview</div>
+            <div class="sv-heading">Intelligent tech for <span>every industry.</span></div>
+          </div>
+          <div>
+            <div class="sv-pills" style="margin-bottom:20px">
+              <span class="sv-pill">POS Systems</span><span class="sv-pill">ERP Integration</span><span class="sv-pill">Cloud Migration</span><span class="sv-pill">Cybersecurity</span><span class="sv-pill">Digital Onboarding</span><span class="sv-pill">IT Infrastructure</span>
+            </div>
+            <div class="sv-stat-row">
+              <div class="sv-stat"><div class="sv-stat-val">15<em>+</em></div><div class="sv-stat-lbl">Deployments</div></div>
+              <div class="sv-stat"><div class="sv-stat-val"><em>4</em></div><div class="sv-stat-lbl">Sectors Covered</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="sv-float">
+          <div class="svf-val">100%</div>
+          <div class="svf-lbl">On-time Delivery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- INFRASTRUCTURE -->
+<section class="sec" id="infra">
+  <div class="wrap">
+    <div class="srv-block flip reveal">
+      <div class="srv-content">
+        <span class="eyebrow">Infrastructure Services</span>
+        <h2 class="s-title">Spaces &amp; Systems<br>Built to Perform.</h2>
+        <p class="s-sub">From the ground up — we design, build and secure both physical and digital environments. Offices, networks, surveillance, and civil infrastructure handled under one roof.</p>
+        <div class="srv-sub-grid">
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+            <div class="sc-title">Design &amp; Build</div>
+            <p class="sc-body">Complete physical and virtual system design — from architecture blueprints to network topology planning.</p>
+          </div>
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+            <div class="sc-title">Interior &amp; Furniture</div>
+            <p class="sc-body">Premium office interiors, ergonomic furniture solutions and branded workspace environments.</p>
+          </div>
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+            <div class="sc-title">Surveillance &amp; Security</div>
+            <p class="sc-body">CCTV systems, access control, biometric security, and real-time monitoring across single or multi-site deployments.</p>
+          </div>
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M6 20V9l6-6 6 6v11"/></svg></div>
+            <div class="sc-title">Civil Infrastructure</div>
+            <p class="sc-body">Civil construction oversight, site planning, project management and infrastructure audits.</p>
+          </div>
+        </div>
+        <div style="margin-top:32px;display:flex;gap:12px"><a href="contact.html" class="btn-p">Request a Proposal &rarr;</a><a href="#consulting" class="btn-g">Next: Consulting</a></div>
+      </div>
+      <div class="srv-visual reveal">
+        <div class="sv-main mid">
+          <div>
+            <div class="sv-label">Infrastructure at a Glance</div>
+            <div class="sv-heading">Spaces built for <span>performance &amp; growth.</span></div>
+          </div>
+          <div>
+            <div class="sv-pills" style="margin-bottom:20px">
+              <span class="sv-pill">Network Setup</span><span class="sv-pill">CCTV &amp; Access</span><span class="sv-pill">Office Interiors</span><span class="sv-pill">Civil Works</span><span class="sv-pill">Server Rooms</span><span class="sv-pill">Structured Cabling</span>
+            </div>
+            <div class="sv-stat-row">
+              <div class="sv-stat"><div class="sv-stat-val"><em>Multi</em></div><div class="sv-stat-lbl">Site Deployments</div></div>
+              <div class="sv-stat"><div class="sv-stat-val">4<em>+</em></div><div class="sv-stat-lbl">Service Types</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="sv-float">
+          <div class="svf-val">End-to-End</div>
+          <div class="svf-lbl">Fully Managed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- CONSULTING -->
+<section class="sec" id="consulting">
+  <div class="wrap">
+    <div class="srv-block reveal">
+      <div class="srv-content">
+        <span class="eyebrow">Consulting</span>
+        <h2 class="s-title">Strategy that Moves<br>the Needle.</h2>
+        <p class="s-sub">From e-commerce growth to corporate programmes and event management — we bring strategic clarity and execution muscle to every challenge.</p>
+        <div class="srv-sub-grid">
+          <div class="sub-card" id="ecommerce">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div class="sc-title">E-commerce Strategy</div>
+            <p class="sc-body">Marketplace positioning, SEO, performance marketing, catalogue optimisation and D2C growth strategy.</p>
+          </div>
+          <div class="sub-card" id="gifting">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div>
+            <div class="sc-title">Corporate Gifting</div>
+            <p class="sc-body">Bespoke corporate gifting solutions — custom packaging, curated products, and nationwide fulfillment at scale.</p>
+          </div>
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <div class="sc-title">CSR Projects</div>
+            <p class="sc-body">End-to-end CSR programme management — planning, vendor coordination, impact reporting and compliance.</p>
+          </div>
+          <div class="sub-card">
+            <div class="sc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <div class="sc-title">Events &amp; Promotions</div>
+            <p class="sc-body">Corporate events, product launches, roadshows and promotional campaigns — concept to execution.</p>
+          </div>
+        </div>
+        <div style="margin-top:32px"><a href="contact.html" class="btn-p">Request a Proposal &rarr;</a></div>
+      </div>
+      <div class="srv-visual reveal">
+        <div class="sv-main teal">
+          <div>
+            <div class="sv-label">Consulting Capabilities</div>
+            <div class="sv-heading">Strategy meets <span>flawless execution.</span></div>
+          </div>
+          <div>
+            <div class="sv-pills" style="margin-bottom:20px">
+              <span class="sv-pill">E-commerce SEO</span><span class="sv-pill">Brand Strategy</span><span class="sv-pill">Gifting Programs</span><span class="sv-pill">CSR Compliance</span><span class="sv-pill">Event Production</span><span class="sv-pill">Promotions</span>
+            </div>
+            <div class="sv-stat-row">
+              <div class="sv-stat"><div class="sv-stat-val">20<em>+</em></div><div class="sv-stat-lbl">Brand Partners</div></div>
+              <div class="sv-stat"><div class="sv-stat-val"><em>4</em></div><div class="sv-stat-lbl">Specialisations</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="sv-float">
+          <div class="svf-val">30+</div>
+          <div class="svf-lbl">Clients Served</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec process-sec">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:0" class="reveal">
+      <span class="eyebrow" style="display:flex;justify-content:center">How We Work</span>
+      <h2 class="s-title">Our Delivery Process</h2>
+      <p class="s-sub" style="margin-left:auto;margin-right:auto">Five clear stages. Total transparency. Zero surprises.</p>
+    </div>
+    <div class="proc-grid reveal">
+      <div class="proc-step"><div class="proc-node">01</div><div class="proc-title">Discover</div><p class="proc-body">Deep-dive into your business, category and competitive landscape to identify real growth levers.</p></div>
+      <div class="proc-step"><div class="proc-node">02</div><div class="proc-title">Strategise</div><p class="proc-body">Build a tailored roadmap with 90-day milestones, clear budgets and measurable KPIs.</p></div>
+      <div class="proc-step"><div class="proc-node">03</div><div class="proc-title">Implement</div><p class="proc-body">Execute with precision — all resources and timelines managed end-to-end by our team.</p></div>
+      <div class="proc-step"><div class="proc-node">04</div><div class="proc-title">Optimise</div><p class="proc-body">Weekly reviews, continuous improvement, and full accountability on every metric.</p></div>
+      <div class="proc-step"><div class="proc-node">05</div><div class="proc-title">Scale</div><p class="proc-body">Expand scope, grow channels, and compound every gain from every phase of the engagement.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-inner reveal">
+    <div>
+      <span class="cta-eyebrow">Let&rsquo;s Talk</span>
+      <h2 class="cta-hed">Ready to Start Your<br><em>Next Big Project</em>?</h2>
+      <p class="cta-deck">Tell us what you need. We&rsquo;ll tell you exactly how we can help — no fluff, no generic proposals.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn-cta">Schedule a Free Consultation &rarr;</a>
+      <a href="about.html" class="btn-cta-ghost">Meet Our Team</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div>
+      <div class="foot-logo"><div class="f-logo-icon"><svg viewBox="0 0 22 22" fill="none"><path d="M11 2L3 18h16L11 2z" fill="white" opacity="0.9"/><path d="M11 9L7.5 18h7L11 9z" fill="white" opacity="0.4"/></svg></div><span class="f-logo-name">PERFEITO GROUP</span></div>
+      <p class="foot-desc">Your end-to-end partner in IT, infrastructure and consulting. Trusted by enterprises since 2019.</p>
+    </div>
+    <div><div class="foot-col-head">Services</div><ul class="foot-links"><li><a href="#it">IT Solutions</a></li><li><a href="#infra">Infrastructure</a></li><li><a href="#consulting">Consulting</a></li><li><a href="#ecommerce">E-commerce Strategy</a></li><li><a href="#gifting">Corporate Gifting</a></li></ul></div>
+    <div><div class="foot-col-head">Company</div><ul class="foot-links"><li><a href="about.html">About Us</a></li><li><a href="about.html#vision">Vision &amp; Mission</a></li><li><a href="index.html#industries">Industries</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><div class="foot-col-head">Contact</div><ul class="foot-links"><li><a href="tel:+919910324923">+91-9910-324923</a></li><li><a href="mailto:virendra@perfeitogroup.com">virendra@perfeitogroup.com</a></li><li><a href="#">New Delhi</a></li><li><a href="#">Greater Noida West</a></li></ul></div>
+  </div>
+  <div class="foot-bottom"><span class="foot-copy">&copy; 2024 Perfeito Group. All Rights Reserved.</span><div class="foot-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+</footer>
+
+<a href="https://wa.me/919910324923" class="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.11 1.523 5.836L.057 23.456a.5.5 0 00.487.544.5.5 0 00.14-.02l5.773-1.505A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.957 9.957 0 01-5.184-1.453l-.371-.22-3.836 1.004 1.02-3.724-.242-.383A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})();
+document.querySelectorAll('a,button,.sub-card,.proc-step').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';cur.style.background='var(--indigo)';ring.style.opacity='0'});el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';cur.style.background='var(--blue)';ring.style.opacity='1'})});
+const sb=document.getElementById('scrollBar');
+window.addEventListener('scroll',()=>{const p=(scrollY/(document.body.scrollHeight-innerHeight))*100;sb.style.width=p+'%'},{passive:true});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4)*80+'ms';obs.observe(el)});
+</script>
+</body>
+</html>
+

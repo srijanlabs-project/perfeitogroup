@@ -1,0 +1,407 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="assets/favicon.png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting &amp; Brand Strategy — Perfeito Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--white:#FFFFFF;--off:#F8FAFF;--dark:#06091A;--navy:#0E1526;--blue:#0B6B6E;--blue-lt:#3D9899;--blue-glow:rgba(11,107,110,0.12);--indigo:#B00D13;--text:#0F172A;--mid:#475569;--muted:#94A3B8;--border:#E2E8F0;--border-lt:#F1F5F9;--green:#10B981;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+#cur{position:fixed;width:8px;height:8px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s,background .15s;}
+#curRing{position:fixed;width:32px;height:32px;border:1.5px solid var(--blue);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:opacity .3s;}
+#scrollBar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--indigo));z-index:10000;width:0%;transition:width .1s;}
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;gap:32px;padding:0 40px;height:68px;transition:background .3s,box-shadow .3s;}
+#nav.scrolled{background:rgba(6,9,26,.96);backdrop-filter:blur(16px);box-shadow:0 2px 24px rgba(0,0,0,.3);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),var(--indigo));border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-icon svg{width:18px;height:18px;}
+.logo-name{font-family:'Playfair Display',serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:.06em;}
+.logo-name span{color:var(--muted);margin-left:2px;}
+.nav-menu{display:flex;align-items:center;gap:4px;margin-left:auto;}
+.nav-item{position:relative;}
+.nav-link{background:none;border:none;color:rgba(255,255,255,.82);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;display:flex;align-items:center;gap:6px;transition:color .2s,background .2s;}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.08);}
+.chev{width:10px;height:7px;transition:transform .25s;}
+.has-mega:hover .chev{transform:rotate(180deg);}
+.mega-panel{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(10,14,30,.97);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;min-width:520px;box-shadow:0 24px 64px rgba(0,0,0,.5);backdrop-filter:blur(20px);}
+.has-mega:hover .mega-panel{display:block;}
+.mega-head{font-family:'Playfair Display',serif;font-weight:700;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;}
+.mega-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.mega-item{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:10px;text-decoration:none;transition:background .2s;}
+.mega-item:hover{background:rgba(255,255,255,.06);}
+.mi-icon{width:36px;height:36px;background:rgba(27,79,216,.2);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mi-icon svg{width:16px;height:16px;stroke:var(--blue-lt);}
+.mi-title{font-family:'Playfair Display',serif;font-weight:600;font-size:13px;color:#fff;margin-bottom:2px;}
+.mi-body{font-size:12px;color:var(--muted);line-height:1.5;}
+.nav-cta{background:var(--blue);color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:9px 20px;border-radius:9px;text-decoration:none;white-space:nowrap;transition:background .2s,transform .15s;margin-left:8px;}
+.nav-cta:hover{background:var(--blue-lt);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:6px;}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+/* MOBILE NAV */
+.mob-nav{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:rgba(6,9,26,.98);z-index:999;overflow-y:auto;padding:24px 20px 40px;transform:translateY(-20px);opacity:0;pointer-events:none;transition:transform .3s,opacity .3s;}
+.mob-nav.open{transform:translateY(0);opacity:1;pointer-events:all;display:block;}
+.mob-section{margin-bottom:28px;}
+.mob-section-head{font-family:'Playfair Display',serif;font-weight:700;font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;padding-left:4px;}
+.mob-link{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;transition:background .2s;}
+.mob-link:hover{background:rgba(255,255,255,.06);}
+.mob-dot{width:32px;height:32px;background:rgba(27,79,216,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mob-dot svg{width:14px;height:14px;stroke:var(--blue-lt);}
+.mob-lt{font-size:14px;color:rgba(255,255,255,.85);font-weight:500;}
+.mob-cta{display:block;margin-top:24px;text-align:center;background:var(--blue);color:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;padding:13px;border-radius:11px;text-decoration:none;}
+/* HERO */
+.hero{background:var(--dark);padding:140px 40px 80px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(27,79,216,.13) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.hero-inner{max-width:1140px;margin:0 auto;}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:32px;}
+.breadcrumb a{color:var(--muted);font-size:13px;text-decoration:none;transition:color .2s;}
+.breadcrumb a:hover{color:#fff;}
+.breadcrumb span{color:var(--muted);font-size:13px;}
+.breadcrumb .bc-cur{color:var(--blue-lt);}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--blue-glow);border:1px solid rgba(27,79,216,.25);border-radius:100px;padding:6px 16px;margin-bottom:24px;}
+.hero-eyebrow span{font-size:12px;font-weight:600;color:var(--blue-lt);letter-spacing:.08em;text-transform:uppercase;}
+.hero h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.6rem);color:#fff;line-height:1.1;margin-bottom:20px;max-width:780px;}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.62);line-height:1.75;max-width:640px;margin-bottom:48px;}
+.stats-row{display:flex;gap:0;border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.03);}
+.stat-item{flex:1;padding:24px 28px;text-align:center;position:relative;}
+.stat-item+.stat-item::before{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:rgba(255,255,255,.1);}
+.stat-num{font-family:'Playfair Display',serif;font-weight:800;font-size:1.8rem;color:#fff;display:block;margin-bottom:4px;}
+.stat-lbl{font-size:12px;color:var(--muted);font-weight:500;}
+/* SECTIONS */
+section{padding:96px 40px;}
+.section-inner{max-width:1140px;margin:0 auto;}
+.section-eyebrow{display:inline-block;font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;}
+.section-h2{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--text);line-height:1.2;margin-bottom:14px;}
+.section-sub{font-size:16px;color:var(--mid);line-height:1.7;max-width:580px;}
+.section-header{margin-bottom:56px;}
+/* CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.card{background:var(--white);border:1.5px solid var(--border);border-radius:18px;padding:28px;transition:transform .3s,box-shadow .3s;opacity:0;transform:translateY(24px);}
+.card.in{opacity:1;transform:translateY(0);}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(27,79,216,.12);}
+.card-icon{width:46px;height:46px;border-radius:12px;background:var(--off);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .25s,border-color .25s;}
+.card:hover .card-icon{background:var(--blue);border-color:var(--blue);}
+.card-icon svg{width:20px;height:20px;stroke:var(--blue);transition:stroke .25s;}
+.card:hover .card-icon svg{stroke:#fff;}
+.card h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:var(--text);margin-bottom:10px;}
+.card p{font-size:14px;color:var(--mid);line-height:1.7;}
+/* PROCESS */
+.process-bg{background:var(--off);}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;position:relative;}
+.process-steps::before{content:'';position:absolute;top:28px;left:calc(12.5% + 14px);right:calc(12.5% + 14px);height:1px;background:linear-gradient(90deg,var(--blue),var(--indigo));opacity:.25;}
+.step{text-align:center;position:relative;}
+.step-num{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--indigo));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:#fff;margin:0 auto 20px;box-shadow:0 8px 24px rgba(27,79,216,.35);}
+.step h4{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--text);margin-bottom:8px;}
+.step p{font-size:13.5px;color:var(--mid);line-height:1.65;}
+/* WHY */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.why-left h2{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--text);line-height:1.2;margin-bottom:16px;}
+.why-left p{font-size:16px;color:var(--mid);line-height:1.75;margin-bottom:32px;}
+.why-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--green);margin-right:10px;margin-bottom:8px;}
+.why-bullets{display:flex;flex-direction:column;gap:16px;}
+.why-bullet{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--off);border:1.5px solid var(--border);border-radius:14px;}
+.why-bullet-icon{width:36px;height:36px;background:var(--blue-glow);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.why-bullet-icon svg{width:16px;height:16px;stroke:var(--blue);}
+.why-bullet-text strong{display:block;font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.why-bullet-text span{font-size:13px;color:var(--mid);}
+/* CTA */
+.cta-section{background:var(--dark);padding:80px 40px;position:relative;overflow:hidden;text-align:center;}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(27,79,216,.18),transparent);}
+.cta-inner{max-width:680px;margin:0 auto;position:relative;}
+.cta-inner h2{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin-bottom:16px;}
+.cta-inner p{font-size:16px;color:rgba(255,255,255,.62);line-height:1.7;margin-bottom:36px;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;padding:14px 32px;border-radius:11px;text-decoration:none;transition:background .2s,transform .15s;}
+.cta-btn:hover{background:var(--blue-lt);transform:translateY(-2px);}
+/* FOOTER */
+footer{background:var(--dark);padding:0;}
+.foot-top{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:48px;padding:64px 40px 48px;}
+.foot-logo{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.f-logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--blue),var(--indigo));border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.f-logo-icon svg{width:18px;height:18px;}
+.f-logo-name{font-family:'Playfair Display',serif;font-weight:800;font-size:14px;color:#fff;letter-spacing:.06em;}
+.foot-desc{font-size:13.5px;color:rgba(255,255,255,.45);line-height:1.8;margin-bottom:24px;}
+.foot-contact-items{display:flex;flex-direction:column;gap:10px;}
+.fci{display:flex;align-items:center;gap:9px;font-size:13px;color:rgba(255,255,255,.5);}
+.fci svg{width:14px;height:14px;stroke:var(--muted);flex-shrink:0;}
+.foot-col-head{font-family:'Playfair Display',serif;font-weight:700;font-size:12px;color:#fff;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;}
+.foot-links{list-style:none;}
+.foot-links li{margin-bottom:10px;}
+.foot-links a{font-size:13.5px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s;}
+.foot-links a:hover{color:#fff;}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.07);padding:22px 40px;max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.foot-copy{font-size:13px;color:rgba(255,255,255,.3);}
+.foot-bottom-links{display:flex;gap:24px;}
+.foot-bottom-links a{font-size:13px;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.foot-bottom-links a:hover{color:#fff;}
+/* WA */
+.wa{position:fixed;bottom:28px;right:28px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:900;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s;}
+.wa:hover{transform:scale(1.1);}
+.wa svg{width:26px;height:26px;fill:#fff;}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .cards-grid{grid-template-columns:repeat(2,1fr);}
+  .process-steps{grid-template-columns:repeat(2,1fr);}
+  .process-steps::before{display:none;}
+  .why-grid{grid-template-columns:1fr;gap:40px;}
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px;}
+}
+@media(max-width:768px){
+  #nav{padding:0 20px;}
+  .nav-menu,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .mob-nav{display:block;}
+  .hero{padding:120px 20px 60px;}
+  .stats-row{flex-direction:column;}
+  .stat-item+.stat-item::before{top:0;left:10%;width:80%;height:1px;}
+  section{padding:64px 20px;}
+  .cards-grid{grid-template-columns:1fr;}
+  .process-steps{grid-template-columns:1fr;}
+  .foot-top{grid-template-columns:1fr;padding:40px 20px;}
+  .foot-bottom{flex-direction:column;gap:12px;padding:20px;text-align:center;}
+  .cta-section{padding:60px 20px;}
+}
+.nav-logo-img{height:34px;width:auto;display:block}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="curRing"></div>
+<div id="scrollBar"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="assets/logo-horizontal.png" alt="Perfeito Group" class="nav-logo-img"></a>
+  <div class="nav-menu" id="navMenu">
+    <div class="nav-item has-mega">
+      <button class="nav-link">Ecommerce <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Ecommerce Services</div>
+        <div class="mega-grid">
+          <a href="d2c-website-development.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="mi-title">D2C Website Development</div><p class="mi-body">Shopify, Magento &amp; custom D2C storefronts built as a complete e-commerce ecosystem.</p></div></a>
+          <a href="marketplace-global-expansion.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div><div><div class="mi-title">Marketplace &amp; Global Expansion</div><p class="mi-body">Domestic quick-commerce to a 40-country marketplace rollout &mdash; account, compliance, logistics.</p></div></a>
+          <a href="consulting-brand-strategy.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="mi-title">Consulting &amp; Brand Strategy</div><p class="mi-body">Diagnose, build, launch, scale &mdash; we execute your brand's growth roadmap end to end.</p></div></a>
+          <a href="content-performance-marketing.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div><div class="mi-title">Content &amp; Performance Marketing</div><p class="mi-body">Catalog, creative and paid media across marketplaces &mdash; media, SEO, influencer commerce.</p></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item has-mega">
+      <button class="nav-link">Infrastructure <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Infrastructure Services</div>
+        <div class="mega-grid">
+          <a href="design-build.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div><div class="mi-title">Design &amp; Build</div><p class="mi-body">Scalable, secure physical and virtual system design and implementation.</p></div></a>
+          <a href="interior-exterior.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div><div><div class="mi-title">Interior &amp; Exterior Furniture</div><p class="mi-body">Innovative, functional and aesthetically stunning workspace design.</p></div></a>
+          <a href="surveillance-and-security.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div><div class="mi-title">Surveillance &amp; Security</div><p class="mi-body">Comprehensive CCTV, access control and network security solutions.</p></div></a>
+          <a href="civil-infra.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M6 20V9l6-6 6 6v11"/></svg></div><div><div class="mi-title">Civil Infra</div><p class="mi-body">Sustainable civil infrastructure using modern engineering techniques.</p></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item has-mega">
+      <button class="nav-link">Corporate Services <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Corporate Services</div>
+        <div class="mega-grid">
+          <a href="gifting.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div><div><div class="mi-title">Gifting</div><p class="mi-body">Personalized, luxury and eco-friendly gifting solutions for corporate &amp; trade.</p></div></a>
+          <a href="csr-project.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="mi-title">CSR Projects</div><p class="mi-body">Planning, execution and monitoring of corporate social responsibility initiatives.</p></div></a>
+          <a href="events-promotions.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="mi-title">Events &amp; Promotions</div><p class="mi-body">Impactful brand experiences, event management and promotional campaigns.</p></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item has-mega">
+      <button class="nav-link">Company <svg class="chev" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <div class="mega-panel">
+        <div class="mega-head">Company</div>
+        <div class="mega-grid">
+          <a href="about.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div><div class="mi-title">About Us</div><p class="mi-body">Our vision, mission, values and the team behind Perfeito Group.</p></div></a>
+          <a href="contact.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="mi-title">Contact Us</div><p class="mi-body">Reach out with questions, proposals or to schedule a consultation.</p></div></a>
+          <a href="our-clients.html" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="mi-title">Our Clients</div><p class="mi-body">Trusted by enterprises, SMEs and PSUs across banking, retail and more.</p></div></a>
+          <a href="contact.html#locations" class="mega-item"><div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="mi-title">Locations</div><p class="mi-body">New Delhi (Okhla) and Greater Noida West &mdash; visit us by appointment.</p></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="contact.html" class="nav-cta">Get in Touch &rarr;</a>
+</nav>
+
+<div class="mob-nav" id="mobNav">
+  <div class="mob-section"><div class="mob-section-head">Ecommerce</div>
+    <a href="d2c-website-development.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><span class="mob-lt">D2C Website Development</span></a>
+    <a href="marketplace-global-expansion.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/></svg></div><span class="mob-lt">Marketplace &amp; Global Expansion</span></a>
+    <a href="consulting-brand-strategy.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="mob-lt">Consulting &amp; Brand Strategy</span></a>
+    <a href="content-performance-marketing.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="13" r="4"/></svg></div><span class="mob-lt">Content &amp; Performance Marketing</span></a>
+  </div>
+  <div class="mob-section"><div class="mob-section-head">Infrastructure</div>
+    <a href="design-build.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M3 3h18v18H3z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Design &amp; Build</span></a>
+    <a href="interior-exterior.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Interior &amp; Exterior</span></a>
+    <a href="surveillance-and-security.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M23 7l-7 5 7 5V7z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Surveillance &amp; Security</span></a>
+    <a href="civil-infra.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M2 20h20M6 20V9l6-6 6 6v11" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Civil Infra</span></a>
+  </div>
+  <div class="mob-section"><div class="mob-section-head">Corporate Services</div>
+    <a href="gifting.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 12 20 22 4 22 4 12" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Gifting</span></a>
+    <a href="csr-project.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">CSR Projects</span></a>
+    <a href="events-promotions.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Events &amp; Promotions</span></a>
+  </div>
+  <div class="mob-section"><div class="mob-section-head">Company</div>
+    <a href="about.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">About Us</span></a>
+    <a href="our-clients.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Our Clients</span></a>
+    <a href="contact.html" class="mob-link"><div class="mob-dot"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.75"/></svg></div><span class="mob-lt">Contact Us</span></a>
+  </div>
+  <a href="contact.html" class="mob-cta">Book a Consultation &rarr;</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="services.html#ecommerce">Ecommerce</a><span>/</span><span class="bc-cur">Consulting &amp; Brand Strategy</span></nav>
+    <div class="hero-eyebrow"><span>Consulting &amp; Brand Strategy</span></div>
+    <h1>We Don&rsquo;t Advise. We Execute.</h1>
+    <p class="hero-sub">One team, one strategy, one accountability. We diagnose your brand's gaps, build the roadmap, launch and scale &mdash; as your extended execution partner, not a consultancy that disappears after the deck.</p>
+    <div class="stats-row">
+      <div class="stat-item"><span class="stat-num">4-Step</span><span class="stat-lbl">Framework</span></div><div class="stat-item"><span class="stat-num">Diagnose</span><span class="stat-lbl">Build &middot; Launch &middot; Scale</span></div><div class="stat-item"><span class="stat-num">C-Level</span><span class="stat-lbl">Access</span></div><div class="stat-item"><span class="stat-num">Category</span><span class="stat-lbl">Leadership</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section style="background:var(--white);">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Our Solutions</span>
+      <h2 class="section-h2">Strategy Backed by Execution</h2>
+      <p class="section-sub">Every capability behind a brand's growth roadmap &mdash; diagnosed, built and delivered by one team.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+        <h3>Digital Commerce Diagnostics</h3>
+        <p>A full audit of your current presence, marketplace rankings, ad efficiency and competitive landscape.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+        <h3>Brand Positioning &amp; Storytelling</h3>
+        <p>Your brand is your story &mdash; we help you tell it well, across every channel and touchpoint.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <h3>Category Leadership Strategy</h3>
+        <p>A roadmap to category leadership, backed by C-level and senior marketplace access.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Go-to-Market Roadmapping</h3>
+        <p>Zero-to-one launch plans and scale roadmaps tailored to your category and market.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Flexible Engagement Models</h3>
+        <p>Retainership, revenue share, or a hybrid of both &mdash; we grow when you grow.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <h3>Performance Governance &amp; Reporting</h3>
+        <p>Transparent monthly reviews and reporting so you always know what's working.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-bg">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">How We Work</span>
+      <h2 class="section-h2">Diagnose. Build. Launch. Scale.</h2>
+      <p class="section-sub">Our four-step framework, built on 20+ years of execution experience.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h4>Diagnose</h4>
+        <p>We audit your current digital presence, execution gaps and competitive landscape.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h4>Build</h4>
+        <p>We build the roadmap, the team structure and the systems your growth plan needs.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h4>Launch</h4>
+        <p>We execute the launch ourselves &mdash; not a plan handed off to someone else.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <h4>Scale</h4>
+        <p>We stay on as your extended partner, scaling what works and fixing what doesn't.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY PERFEITO -->
+<section style="background:var(--white);">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-left reveal">
+        <span class="section-eyebrow">Why Perfeito</span>
+        <h2>Your Brand Is Your Story. Tell It Well.</h2>
+        <p>Most brands don't fail because of their product &mdash; they fail because of execution. We don't chase likes or discounts. We act as your extended partner, handling everything from launch to scale, across every platform.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="why-tag">One Team</span>
+          <span class="why-tag">One Strategy</span>
+          <span class="why-tag">One Accountability</span>
+          
+        </div>
+      </div>
+      <div class="why-bullets reveal">
+        <div class="why-bullet"><div class="why-bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="20 6 9 17 4 12"/></svg></div><div class="why-bullet-text"><strong>We Execute, Not Just Advise</strong><span>A dedicated execution team runs your roadmap &mdash; we don't hand off a deck and disappear.</span></div></div>
+        <div class="why-bullet"><div class="why-bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="why-bullet-text"><strong>C-Level &amp; Category Leadership Access</strong><span>Direct access to senior marketplace and platform relationships that unlock faster growth.</span></div></div>
+        <div class="why-bullet"><div class="why-bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="why-bullet-text"><strong>In-House Performance Marketing Engine</strong><span>Strategy backed by our own media, content and marketplace execution teams.</span></div></div>
+        <div class="why-bullet"><div class="why-bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="why-bullet-text"><strong>Flexible, Skin-in-the-Game Models</strong><span>Retainership, revenue share or hybrid engagement &mdash; we grow when you grow.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Let&rsquo;s Build Your Growth Engine</h2>
+    <p>Ready to scale your digital commerce? Let's diagnose where you stand and build the roadmap together.</p>
+    <a href="contact.html" class="cta-btn">Talk to Our Strategy Team &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-top">
+    <div><div class="foot-logo"><div class="f-logo-icon"><svg viewBox="0 0 22 22" fill="none"><path d="M11 2L3 18h16L11 2z" fill="white" opacity="0.9"/><path d="M11 9L7.5 18h7L11 9z" fill="white" opacity="0.4"/></svg></div><span class="f-logo-name">PERFEITO GROUP</span></div><p class="foot-desc">Your end-to-end partner in e-commerce execution, infrastructure design, and brand growth strategy. Trusted by enterprises, SMEs and PSUs since 2019.</p><div class="foot-contact-items"><span class="fci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.63 19.79 19.79 0 010 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L4.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>+91-9910-324923</span><span class="fci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>virendra@perfeitogroup.com</span><span class="fci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>New Delhi &amp; Greater Noida West</span></div></div>
+    <div><div class="foot-col-head">Ecommerce</div><ul class="foot-links"><li><a href="d2c-website-development.html">D2C Website Development</a></li><li><a href="marketplace-global-expansion.html">Marketplace &amp; Global Expansion</a></li><li><a href="consulting-brand-strategy.html">Consulting &amp; Brand Strategy</a></li><li><a href="content-performance-marketing.html">Content &amp; Performance Marketing</a></li></ul></div>
+    <div><div class="foot-col-head">Infrastructure</div><ul class="foot-links"><li><a href="design-build.html">Design &amp; Build</a></li><li><a href="surveillance-and-security.html">Surveillance &amp; Security</a></li><li><a href="civil-infra.html">Civil Infra</a></li><li><a href="interior-exterior.html">Interior &amp; Exterior</a></li></ul></div><div><div class="foot-col-head">Corporate Services</div><ul class="foot-links"><li><a href="gifting.html">Corporate Gifting</a></li><li><a href="csr-project.html">CSR Projects</a></li><li><a href="events-promotions.html">Events &amp; Promotions</a></li></ul></div>
+    <div><div class="foot-col-head">Company</div><ul class="foot-links"><li><a href="about.html">About Us</a></li><li><a href="our-clients.html">Our Clients</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+  </div>
+  <div class="foot-bottom"><span class="foot-copy">&copy; 2024 Perfeito Group. All Rights Reserved.</span><div class="foot-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+</footer>
+
+<a href="https://wa.me/919910324923" class="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.11 1.523 5.836L.057 23.456a.5.5 0 00.487.544.5.5 0 00.14-.02l5.773-1.505A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.957 9.957 0 01-5.184-1.453l-.371-.22-3.836 1.004 1.02-3.724-.242-.383A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+
+<script>
+
+const nav=document.getElementById('nav'),sb=document.getElementById('scrollBar');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>40);sb.style.width=(scrollY/(document.body.scrollHeight-innerHeight))*100+'%'},{passive:true});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%5)*80+'ms';obs.observe(el);const r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)setTimeout(()=>el.classList.add('in'),i*55)});
+const ham=document.getElementById('hamburger'),mob=document.getElementById('mobNav');if(ham&&mob){ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''})};mob&&mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open');document.body.style.overflow=''}));
+</script>
+</body>
+</html>
+
